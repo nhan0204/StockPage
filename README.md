@@ -1,4 +1,3 @@
 # StockPage
 
-![Nav bar and Search]
-(frontend/public/stockpage.png)
+![Nav bar and Search](frontend/public/stockpage.png)

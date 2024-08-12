@@ -6,7 +6,7 @@ const Search = (props: Props) => {
     return (
         <>
             <div className='flex flex-col items-center'>
-                <div className='container bg-slate-200 w-6/12 h-auto py-2 px-5 rounded-3xl'>
+                <div className='container bg-slate-200 w-6/12 h-auto py-2 px-4 rounded-3xl'>
                     {/* Search bar container */}
                     <form className='w-full h-9 flex items-center '>
                         {/* Search icon container */}

@@ -15,9 +15,13 @@ module.exports = {
         darkPurple: "rgba(141,117,230,255)",
         lightPurple: "rgba(234,222,248,255)",
         dark: "rgba(50,48,59,255)",
+        creame: "rgba(251,244,228,255)",
+        darkCreame: "rgba(252, 251, 249, 1)",
       },
       fontFamily: {
-        sans: ["Poppins", "sans-serif"]
+        sans: ["Poppins", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+        compagnon: ["Compagnon", "sans-serif"],
       }
     },
   },

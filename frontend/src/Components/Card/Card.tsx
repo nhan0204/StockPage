@@ -13,7 +13,7 @@ const Card: React.FC<CardProps> = ({ id, searchResult, onPortfolioCreate }) => {
         <div
             id={id}
             key={id}
-            className='group-hover:blur-sm hover:!blur-none bg-slate-100 w-full container space-y-3 px-4 py-3 rounded-2xl relative '
+            className='hover:scale-105 bg-slate-100 w-full container space-y-3 px-4 py-3 rounded-2xl relative '
         >
             <div className='space-y-3'>
                 <div className='w-16 mt-2'>

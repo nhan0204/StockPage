@@ -1,14 +1,18 @@
+import React from 'react';
 import logo from './stock.png';
+import { Link } from 'react-router-dom';
 
-interface Props { }
+interface NavbarProps { }
 
-const Navbar = (props: Props) => {
+const Navbar: React.FC<NavbarProps> = (props) => {
     return (
         <nav className='container relative mx-auto p-6'>
             <div className='flex items-center justify-between'>
                 {/* Dashboard and Logo */}
                 <div className='flex items-center space-x-12'>
-                    <img className='w-32' alt="logo" src={logo}/>
+                    <Link to="/">
+                        <img className='w-32' alt="logo" src={logo}/>
+                    </Link>
                     <div className='font-semiBold flex'>
                         <a href='' className='text-black hover:opacity-40 text-lg flex'>
                             Dashboard

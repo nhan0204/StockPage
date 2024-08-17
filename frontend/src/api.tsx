@@ -1,64 +1,60 @@
-import axios, { Axios } from "axios";
-import { CompanyRealtimePrice, CompanySearch } from "./company";
+import { CompanyPeerGroup, CompanyProfile, CompanyRealtimePrice, CompanySearch } from "./company";
+import { fetchData } from "./Helpers/DataFetching";
 
-const apikey = process.env.REACT_APP_API_KEY;
+const finPrepApiKey = process.env.REACT_APP_FIN_PREP_API_KEY;
+const finHubApiKey = process.env.REACT_APP_FIN_HUB_API_KEY;
+
 
 interface SearchCompaniesResponse {
     data: CompanySearch[];
 }
 
 export const searchCompanies = async (query: string) => {
-    try {
-        const request = `https://financialmodelingprep.com/api/v3/search-ticker?query=${query}&limit=10&exchange=NASDAQ&apikey=${apikey}`;
-        const response = await axios.get<SearchCompaniesResponse>(request);
-        return response;
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            console.log('error message: ', error.message);
-            return error.message;
-        } else {
-            console.log('unexpected error: ', error);
-            return "An unexpected error has occured";
-        }
-    }
+    const request = `https://financialmodelingprep.com/api/v3/search-ticker?query=${query}&limit=10&exchange=NASDAQ&apikey=${finPrepApiKey}`;
+    const data = await fetchData<SearchCompaniesResponse>(request);
+    return data;
 }
 
-interface SearchCompanyLogoResponse {
+interface GetCompanyLogoResponse {
     url: string;
 }
 
-export const searchCompanyLogo = async(symbol: string) => {
-    try {
-        const request = `https://financialmodelingprep.com/image-stock/${symbol}.png?apikey=${apikey}`;
-        const response = await axios.get<SearchCompanyLogoResponse>(request);
-        return response.config.url;
-    } catch(error) {
-        if (axios.isAxiosError(error)) {
-            console.log('error message: ', error.message);
-            return error.message;
-        } else {
-            console.log('unexpected error: ', error);
-            return "An unexpected error has occured";
-        }
-    }
+export const getCompanyLogo = async(symbol: string) => {
+    const request = `https://financialmodelingprep.com/image-stock/${symbol}.png?apikey=${finPrepApiKey}`;
+    const data = await fetchData<GetCompanyLogoResponse>(request);
+    
+    if (typeof data === "string") 
+        return "Api error" + data;
+
+    return data.config.url;
 }
 
-interface SearchCompanyPriceResponse {
+interface GetCompanyPriceResponse {
     data: CompanyRealtimePrice[];
 }
 
-export const searchCompanyPrice = async(symbol: string) => {
-    try {
-        const request = `https://financialmodelingprep.com/api/v3/stock/full/real-time-price/${symbol}?apikey=${apikey}`;
-        const response = await axios.get<SearchCompanyPriceResponse>(request);
-        return response;
-    } catch(error) {
-        if (axios.isAxiosError(error)) {
-            console.log('error message: ', error.message);
-            return error.message;
-        } else {
-            console.log('unexpected error: ', error);
-            return "An unexpected error has occured";
-        }
-    }
+export const getCompanyPrice = async(symbol: string) => {
+    const request = `https://financialmodelingprep.com/api/v3/stock/full/real-time-price/${symbol}?apikey=${finPrepApiKey}`;
+    const data = await fetchData<GetCompanyPriceResponse>(request);
+    return data;
+}
+
+interface GetCompanyProfileResponse {
+    data: CompanyProfile[];
+}
+
+export const getCompanyProfile = async(symbol: string) => {
+    const request = `https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=${finPrepApiKey}`;
+    const data = await fetchData<GetCompanyPriceResponse>(request);
+    return data;
+}
+
+interface GetCompanyPeerGroupsResponse {
+    data: CompanyPeerGroup[];
+}
+
+export const getCompanyPeerGroup = async(symbol: string) => {
+    const request = `https://finnhub.io/api/v1/stock/peers?symbol=${symbol}&token=${finHubApiKey}`;
+    const data = await fetchData<GetCompanyPriceResponse>(request);
+    return data;
 }

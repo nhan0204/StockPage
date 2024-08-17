@@ -16,7 +16,7 @@ module.exports = {
         lightPurple: "rgba(234,222,248,255)",
         dark: "rgba(50,48,59,255)",
         creame: "rgba(251,244,228,255)",
-        darkCreame: "rgba(252, 251, 249, 1)",
+        darkCreame: "rgba(248, 233, 199, 1)",
       },
       fontFamily: {
         sans: ["Poppins", "sans-serif"],

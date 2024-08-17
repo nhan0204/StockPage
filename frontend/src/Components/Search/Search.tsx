@@ -9,7 +9,7 @@ interface SearchProps {
 const Search: React.FC<SearchProps> = ({ search, onSearchSubmit, handleSearchChange }) => {
     return (
         <>
-            <div className='flex flex-col items-center'>
+            <div className='flex flex-col items-center mt-12'>
                 <div className='container bg-slate-200 w-6/12 h-auto py-2 px-4 rounded-full'>
                     {/* Search bar container */}
                     <form className='space-x-3 h-9 flex items-center' onSubmit={onSearchSubmit}>
@@ -27,7 +27,7 @@ const Search: React.FC<SearchProps> = ({ search, onSearchSubmit, handleSearchCha
                         </input>
                         <button
                             type="submit"
-                            className='w-24 h-full  bg-white text-dark rounded-2xl hover:text-white hover:bg-dark'
+                            className='w-24 h-full px-2 text-sm lg:text-base bg-white text-dark rounded-2xl hover:text-white hover:bg-dark'
                         >
                             Search
                         </button>

@@ -14,9 +14,9 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                         <img className='w-32' alt="logo" src={logo}/>
                     </Link>
                     <div className='font-semiBold flex'>
-                        <a href='' className='text-black hover:opacity-40 text-lg flex'>
-                            Dashboard
-                        </a>
+                        <Link to="/search" className='text-xl text-black hover:opacity-40 flex'>
+                            Search
+                        </Link>
                     </div>
                 </div>
 

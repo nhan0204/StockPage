@@ -1,5 +1,6 @@
-import React, { SyntheticEvent } from 'react'
-import { CompanyRealtimePrice } from '../../../company'
+import React, { SyntheticEvent } from 'react';
+import { Link } from 'react-router-dom';
+import { CompanyRealtimePrice } from '../../../company';
 import DeletePortfolio from '../DeletePortfolio/DeletePortfolio';
 
 interface PortfolioProps {
@@ -10,15 +11,19 @@ interface PortfolioProps {
 
 const Portfolio: React.FC<PortfolioProps> = ({ id, value,  onPortfolioDelete}) => {
     return (
-        <div id={id} key={id} className=''>
-            <h2 className='text-darkCreame ml-2 font-compagnon font-semibold text-lg flex justify-between'>
-                {value.symbol}
-                <DeletePortfolio
-                    portfolioValue={value}
-                    onPortfolioDelete={onPortfolioDelete}
-                />
-            </h2>
-            <div className='bg-creame w-full container p-3 rounded-lg relative'>
+        <div id={id} key={id} className='hover:scale-105 transform scale-100 transition-transform  duration-100 ease-out'>
+            <div >
+                <h2 className='text-darkCreame ml-2 font-compagnon font-semibold text-lg flex justify-between hover:creame'>
+                    <Link className='hover:opacity-70' to={`/company/${value.symbol}`} type='button'>
+                        {value.symbol}
+                    </Link>
+                    <DeletePortfolio
+                        portfolioValue={value}
+                        onPortfolioDelete={onPortfolioDelete}
+                    />
+                </h2>
+            </div>
+            <div className='bg-darkCreame w-full container p-3 rounded-lg relative hover:shadow-xl hover:bg-creame'>
                 <ul className='font-sans list-disc'>
                     <li className=' flex justify-between hover:scale-110  hover:font-semibold'>Ask price: <span>{value.askPrice}$</span> </li>
                     <li className=' flex justify-between hover:scale-110  hover:font-semibold'>Bid price: <span>{value.bidPrice}$</span> </li>

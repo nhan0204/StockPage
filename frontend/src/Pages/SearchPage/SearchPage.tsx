@@ -1,34 +1,42 @@
-import React, { ChangeEvent, SyntheticEvent, useState } from 'react'
+import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
+import { getCompanyLogo, getCompanyPrice, searchCompanies } from '../../api';
 import { CompanyRealtimePrice, CompanySearch } from '../../company';
-import { searchCompanies, searchCompanyLogo, searchCompanyPrice } from '../../api';
-import Search from '../../Components/Search/Search';
-import PortfolioList from '../../Components/Portfolio/PortfolioList/PortfolioList';
 import CardList from '../../Components/CardList/CardList';
+import PortfolioList from '../../Components/Portfolio/PortfolioList/PortfolioList';
+import Search from '../../Components/Search/Search';
+import Spinner from '../../Components/Spinner/Spinner';
+import NotFound from '../../Components/Errors/NotFound/NotFound';
 
 interface SearchPageProps { }
 
 const SearchPage: React.FC<SearchPageProps> = () => {
     const [search, setSearch] = useState<string>("");
+    const [isSearching, setIsSearching] = useState<boolean>(false);
     const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
     const [portfolioValues, setPortfolioValues] = useState<CompanyRealtimePrice[]>([]);
-    const [severError, setServerError] = useState<string>("");
+    const [serverError, setServerError] = useState<string>("");
+
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
+        setIsSearching(false);
     }
-
+    
     const onSearchSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
+        
+        setIsSearching(true);
+        setSearchResult([]);
+        setServerError("");
 
         const result = await searchCompanies(search);
 
         if (typeof result === "string") {
             setServerError(result);
         } else if (Array.isArray(result.data)) {
-
             const companies = await Promise.all(
                 result.data.map(async (company) => {
-                    company.logo = await searchCompanyLogo(company.symbol);
+                    company.logo = await getCompanyLogo(company.symbol);
                     company.price = await searchCompanyPrices(company.symbol);
                     return company;
                 })
@@ -40,7 +48,7 @@ const SearchPage: React.FC<SearchPageProps> = () => {
     }
 
     const searchCompanyPrices = async (symbol: string) => {
-        const prices = await searchCompanyPrice(symbol);
+        const prices = await getCompanyPrice(symbol);
 
         if (typeof prices === 'string') {
             setServerError(prices)
@@ -76,6 +84,13 @@ const SearchPage: React.FC<SearchPageProps> = () => {
             console.log("Failed to remove portfolio", error);
         }
     }
+
+    useEffect(() => {
+        if (isSearching) {
+            setSearchResult([]);
+        }
+    },[isSearching])
+
     return (
         <>
             <Search
@@ -89,10 +104,15 @@ const SearchPage: React.FC<SearchPageProps> = () => {
                 onPortfolioDelete={onPortfolioDelete}
             />
 
-            <CardList
-                searchResults={searchResult}
-                onPortfolioCreate={onPortfolioCreate}
-            />
+            {isSearching ? (
+                serverError ?
+                    <NotFound serverError={serverError}/>:
+                    searchResult ? 
+                        <CardList searchResults={searchResult} onPortfolioCreate={onPortfolioCreate}/> :
+                        <Spinner/>
+            ) : (
+                <></>
+            )}
         </>
     );
 };

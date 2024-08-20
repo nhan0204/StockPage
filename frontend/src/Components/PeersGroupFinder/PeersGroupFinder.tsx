@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getCompanyPeerGroup } from '../../api';
 import { CompanyPeerGroup } from '../../company';
-import CompanyFinderItem from './CompanyFinderItem/CompanyFinderItem';
+import CompanyFinderItem from './PeersGroupItem/PeersGroupItem';
 import { v4 as uuidv4 } from 'uuid';
 import Spinner from '../Spinner/Spinner';
 
@@ -28,18 +28,14 @@ const CompanyFinder: React.FC<CompanyFinderProps> = ({ ticker }) => {
         getPeerGroupInit(ticker);
     }, [ticker]);
 
-
     return (
         <>
-            <div className='flex flex-col'>
-                Peer group:
-                { 
-                    companyData ?
-                        companyData.peerList.map(ticker =>
-                            <CompanyFinderItem id={ticker} key={uuidv4()} ticker={ticker} />
-                        ) :
-                    <Spinner /> 
-                }
+            <div className='inline-flex rounded-md shadow-sm m-4'>
+                {companyData ? (
+                    companyData.peerList.map(ticker => <CompanyFinderItem id={ticker} key={uuidv4()} ticker={ticker} />)
+                ) : (
+                    <Spinner />
+                )}
             </div>
         </>
     );

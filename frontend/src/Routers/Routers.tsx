@@ -15,6 +15,7 @@ export const router = createBrowserRouter([
                 path: "company/:ticker", 
                 element: <CompanyPage />,
                 children: [
+                    
                 ]            
             }
         ]

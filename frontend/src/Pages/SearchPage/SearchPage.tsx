@@ -6,6 +6,7 @@ import PortfolioList from '../../Components/Portfolio/PortfolioList/PortfolioLis
 import Search from '../../Components/Search/Search';
 import Spinner from '../../Components/Spinner/Spinner';
 import NotFound from '../../Components/Errors/NotFound/NotFound';
+import Navbar from '../../Components/Navbar/Navbar';
 
 interface SearchPageProps { }
 
@@ -21,10 +22,10 @@ const SearchPage: React.FC<SearchPageProps> = () => {
         setSearch(e.target.value);
         setIsSearching(false);
     }
-    
+
     const onSearchSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
-        
+
         setIsSearching(true);
         setSearchResult([]);
         setServerError("");
@@ -89,7 +90,7 @@ const SearchPage: React.FC<SearchPageProps> = () => {
         if (isSearching) {
             setSearchResult([]);
         }
-    },[isSearching])
+    }, [isSearching])
 
     return (
         <>
@@ -99,6 +100,7 @@ const SearchPage: React.FC<SearchPageProps> = () => {
                 handleSearchChange={handleSearchChange}
             />
 
+
             <PortfolioList
                 portfolioValues={portfolioValues}
                 onPortfolioDelete={onPortfolioDelete}
@@ -106,10 +108,10 @@ const SearchPage: React.FC<SearchPageProps> = () => {
 
             {isSearching ? (
                 serverError ?
-                    <NotFound serverError={serverError}/>:
-                    searchResult ? 
-                        <CardList searchResults={searchResult} onPortfolioCreate={onPortfolioCreate}/> :
-                        <Spinner/>
+                    <NotFound serverError={serverError} /> :
+                    searchResult ?
+                        <CardList searchResults={searchResult} onPortfolioCreate={onPortfolioCreate} /> :
+                        <Spinner />
             ) : (
                 <></>
             )}

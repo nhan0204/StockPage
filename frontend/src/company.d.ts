@@ -64,3 +64,13 @@ export interface CompanyProfile {
 export interface CompanyPeerGroup {
     peerList: string[];
 }
+
+export interface CompanySectorFilings {
+    symbol: string;
+    fillingDate: string;
+    acceptedDate:  string;
+    cik: string;
+    type: string;
+    link: string;
+    finalLink: string;
+}

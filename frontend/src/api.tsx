@@ -1,6 +1,7 @@
-import { CompanyPeerGroup, CompanyProfile, CompanyRealtimePrice, CompanySearch } from "./company";
+import { CompanyPeerGroup, CompanyProfile, CompanyRealtimePrice, CompanySearch, CompanySectorFilings } from "./company";
 import { fetchData } from "./Helpers/DataFetching";
 
+const alphaApiKey = process.env.REACT_APP_ALPHA_API_KEY;
 const finPrepApiKey = process.env.REACT_APP_FIN_PREP_API_KEY;
 const finHubApiKey = process.env.REACT_APP_FIN_HUB_API_KEY;
 
@@ -11,8 +12,8 @@ interface SearchCompaniesResponse {
 
 export const searchCompanies = async (query: string) => {
     const request = `https://financialmodelingprep.com/api/v3/search-ticker?query=${query}&limit=10&exchange=NASDAQ&apikey=${finPrepApiKey}`;
-    const data = await fetchData<SearchCompaniesResponse>(request);
-    return data;
+    const response = await fetchData<SearchCompaniesResponse>(request);
+    return response;
 }
 
 interface GetCompanyLogoResponse {
@@ -21,12 +22,12 @@ interface GetCompanyLogoResponse {
 
 export const getCompanyLogo = async(symbol: string) => {
     const request = `https://financialmodelingprep.com/image-stock/${symbol}.png?apikey=${finPrepApiKey}`;
-    const data = await fetchData<GetCompanyLogoResponse>(request);
+    const response = await fetchData<GetCompanyLogoResponse>(request);
     
-    if (typeof data === "string") 
-        return "Api error" + data;
+    if (typeof response === "string") 
+        return "Api error" + response;
 
-    return data.config.url;
+    return response.config.url;
 }
 
 interface GetCompanyPriceResponse {
@@ -35,8 +36,8 @@ interface GetCompanyPriceResponse {
 
 export const getCompanyPrice = async(symbol: string) => {
     const request = `https://financialmodelingprep.com/api/v3/stock/full/real-time-price/${symbol}?apikey=${finPrepApiKey}`;
-    const data = await fetchData<GetCompanyPriceResponse>(request);
-    return data;
+    const response = await fetchData<GetCompanyPriceResponse>(request);
+    return response;
 }
 
 interface GetCompanyProfileResponse {
@@ -45,8 +46,8 @@ interface GetCompanyProfileResponse {
 
 export const getCompanyProfile = async(symbol: string) => {
     const request = `https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=${finPrepApiKey}`;
-    const data = await fetchData<GetCompanyPriceResponse>(request);
-    return data;
+    const response = await fetchData<GetCompanyPriceResponse>(request);
+    return response;
 }
 
 interface GetCompanyPeerGroupsResponse {
@@ -55,6 +56,16 @@ interface GetCompanyPeerGroupsResponse {
 
 export const getCompanyPeerGroup = async(symbol: string) => {
     const request = `https://finnhub.io/api/v1/stock/peers?symbol=${symbol}&token=${finHubApiKey}`;
-    const data = await fetchData<GetCompanyPriceResponse>(request);
-    return data;
+    const response = await fetchData<GetCompanyPriceResponse>(request);
+    return response;
+}
+
+interface GetCompanySectorFilingsResponse {
+    data: CompanySectorFilings[];
+}
+
+export const getCompanySectorFilings = async(symbol: string) => {
+    const request = `https://financialmodelingprep.com/api/v3/sec_filings/${symbol}?type=10-k&page=0&apikey=${finPrepApiKey}`;
+    const response = await fetchData<GetCompanySectorFilingsResponse>(request);
+    return response;
 }

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { getCompanyPeerGroup } from '../../api';
 import { CompanyPeerGroup } from '../../company';
-import CompanyFinderItem from './PeersGroupItem/PeersGroupItem';
-import { v4 as uuidv4 } from 'uuid';
 import Spinner from '../Spinner/Spinner';
+import CompanyFinderItem from './PeersGroupItem/PeersGroupItem';
+import './PeersGroupFinder.css';
 
 interface CompanyFinderProps {
     ticker: string;
+    className: string;
 }
 
-const CompanyFinder: React.FC<CompanyFinderProps> = ({ ticker }) => {
+const CompanyFinder: React.FC<CompanyFinderProps> = ({ ticker, className }) => {
     const [companyData, setCompanyData] = useState<CompanyPeerGroup>();
 
     const getPeerGroupInit = async (ticker: string) => {
@@ -20,7 +22,8 @@ const CompanyFinder: React.FC<CompanyFinderProps> = ({ ticker }) => {
         if (typeof result === "string") {
             console.log("api error: ", result);
         } else if (Array.isArray(result.data)) {
-            setCompanyData({ peerList: result.data });
+            const peerList = result.data.filter(company => company != ticker);
+            setCompanyData({ peerList: peerList });
         }
     }
 
@@ -30,9 +33,13 @@ const CompanyFinder: React.FC<CompanyFinderProps> = ({ ticker }) => {
 
     return (
         <>
-            <div className='inline-flex rounded-md shadow-sm m-4'>
+            <div className={className}>
                 {companyData ? (
-                    companyData.peerList.map(ticker => <CompanyFinderItem id={ticker} key={uuidv4()} ticker={ticker} />)
+                    <div id='placeholder' className='flex gap-4  container pl-2 h-16 items-center overflow-y-hidden'>
+                        {companyData.peerList.map(ticker =>
+                            <CompanyFinderItem id={ticker} key={uuidv4()} ticker={ticker} />
+                        )}
+                    </div>
                 ) : (
                     <Spinner />
                 )}

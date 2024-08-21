@@ -4,6 +4,7 @@ import { CompanySectorFilings } from '../../company';
 import Spinner from '../Spinner/Spinner';
 import SectorFilingsItem from './SectorFilingsItem/SectorFilingsItem';
 import {v4 as uuidv4} from 'uuid';
+import Tag from '../Tag/Tag';
 
 interface SectorFilingsProps {
     ticker: string | undefined;
@@ -31,7 +32,8 @@ const SectorFilings: React.FC<SectorFilingsProps> = ({ ticker }) => {
 
 
     return (
-        <div>
+        <div className='flex flex-col'>
+            <Tag className='mb-4' head='Sector' tail='Fillings'/>
             { filingsData ? (
                 filingsData?.slice(0, 5).map(sector => 
                     <SectorFilingsItem id={sector.symbol} key={uuidv4()} sector={sector}/>

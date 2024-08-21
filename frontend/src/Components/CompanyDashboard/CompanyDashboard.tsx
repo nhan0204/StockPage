@@ -8,7 +8,7 @@ interface CompanyDashboardProps {
 
 const CompanyDashboard: React.FC<CompanyDashboardProps> = ({children, ticker}) => {
     return (
-        <div className='relative ml-44 xl:ml-64 bg-slate-100 w-full'>
+        <div className='relative container w-full bg-slate-100'>
             <div id="company-children">{children}</div>
             <div id="company-outlet">{<Outlet context={ticker}/>}</div>
         </div>

@@ -37,7 +37,6 @@ const SearchPage: React.FC<SearchPageProps> = () => {
         } else if (Array.isArray(result.data)) {
             const companies = await Promise.all(
                 result.data.map(async (company) => {
-                    company.logo = await getCompanyLogo(company.symbol);
                     company.price = await searchCompanyPrices(company.symbol);
                     return company;
                 })

@@ -15,6 +15,7 @@ module.exports = {
         darkPurple: "rgba(141,117,230,255)",
         lightPurple: "rgba(234,222,248,255)",
         dark: "rgba(50,48,59,255)",
+        darkTilt: "rgba(71, 69, 80, 1)",
         creame: "rgba(251,244,228,255)",
         darkCreame: "rgba(248, 233, 199, 1)",
       },
@@ -25,6 +26,8 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwind-scrollbar")
+  ],
 }
 

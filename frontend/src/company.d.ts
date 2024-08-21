@@ -4,7 +4,6 @@ export interface CompanySearch {
     currency: string;
     stockExchange: string;
     exchangeShortName: string;
-    logo: string | undefined;
     price: CompanyRealtimePrice | undefined;
 }
 

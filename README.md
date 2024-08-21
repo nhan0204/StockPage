@@ -4,5 +4,5 @@
 # SearchPage
 ![Navbar and Search](frontend/public/stockpage.png)
 
-#Dashboard
+# Dashboard
 ![Dashboard](frontend/public/dashboard.png)

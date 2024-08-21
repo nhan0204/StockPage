@@ -1,5 +1,8 @@
 # HomePage
-![Home page](frontend/public/homepage.png)
+![Homepage](frontend/public/homepage.png)
 
 # SearchPage
-![Nav bar and Search](frontend/public/stockpage.png)
+![Navbar and Search](frontend/public/stockpage.png)
+
+#Dashboard
+![Dashboard](frontend/public/dashboard.png)

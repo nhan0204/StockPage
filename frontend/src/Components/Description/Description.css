@@ -1,10 +1,3 @@
-#collapse {
-}
-
-#toggle {
-    display: none;
-}
-
 #head::before {
     position: absolute;
     content: "expand_more";
@@ -14,14 +7,14 @@
     font-size: 2rem;
 
     transform: translate(0, -50%);
-    transition: transform 0.5s ease, content 0.5s ease;
+    transition: transform 0.7s ease, content 0.7s ease;
 }
 
 #content {
     margin: auto;
     overflow: auto;
     width:90%;
-    transition: max-height 0.5s ease, visibility 0.5s ease;
+    transition: max-height 1s ease, visibility 1s ease;
 }
 
 #content > span {

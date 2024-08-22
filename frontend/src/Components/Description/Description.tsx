@@ -10,7 +10,7 @@ const Description: React.FC<DescriptionProps> = ({ description, className }) => 
     return (
         <div className={className}>
             <div id='collapse' className='max-w-sm lg:max-w-xl xl:max-w-5xl rounded-xl h-fit'>
-                <input id="toggle" name="" type="checkbox"></input>
+                <input id="toggle" type="checkbox" className='hidden'></input>
                 <label 
                     id="head" 
                     htmlFor="toggle" 

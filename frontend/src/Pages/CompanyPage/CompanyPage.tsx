@@ -4,11 +4,12 @@ import Spinner from 'react-spinner';
 import { getCompanyLogo, getCompanyProfile } from '../../api';
 import { CompanyProfile } from '../../company';
 import CompanyDashboard from '../../Components/CompanyDashboard/CompanyDashboard';
-import Description from '../../Components/Description/Description';
-import Title from '../../Components/Tile/Tile';
 import CompanyLogo from '../../Components/CompanyLogo/CompanyLogo';
+import Description from '../../Components/Description/Description';
 import PeersGroupFinder from '../../Components/PeersGroupFinder/PeersGroupFinder';
+import Title from '../../Components/Tile/Tile';
 import Sidebar from '../../Components/Sidebar/Sidebar';
+import './CompanyPage.css'
 
 interface CompanyPageProps { }
 
@@ -40,41 +41,38 @@ const CompanyPage: React.FC<CompanyPageProps> = () => {
     }, []);
 
     return (
-        <>
+        <div id='company-page' className="relative flex">
+            <Sidebar />
             {company ? (
-                <div className="flex justify-between h-[200vh]">
-                    <Sidebar className='block w-full'/>
-                    
-                    <CompanyDashboard ticker={ticker!}>
-                        <div className='relative flex'>
-                            <CompanyLogo
-                                ticker={ticker!}
-                                className='ml-10 mt-12 mb-6 mr-8 w-40 lg:w-64 xl:w-96'
-                            />
-                            <Description
-                                description={company.description}
-                                className='mx-auto lg:mt-12 xl:mt-20'
-                            />
-                        </div>
-
-
-                        {/* General info */}
-                        <div className='ml-10 max-w-[80vw] grid grid-cols-1 lg:grid-cols-3 gap-4'>
-                            <Title title="Company Name" subTitle={company.companyName}></Title>
-                            <Title title="Price" subTitle={`${company.price} ${company.currency}`}></Title>
-                            <Title title="Industry" subTitle={`${company.industry}`}></Title>
-                        </div>
-
-                        <PeersGroupFinder 
+                <CompanyDashboard ticker={ticker!} className='h-[120vh]'>
+                    <div id='description' className='relative flex justify-evenly'>
+                        <CompanyLogo
                             ticker={ticker!}
-                            className='ml-10 mt-6'    
+                            className='mt-12 mb-6 w-40 lg:w-64 xl:w-96'
                         />
-                    </CompanyDashboard>
-                </div>
+                        <Description
+                            description={company.description}
+                            className='lg:mt-12 xl:mt-20'
+                        />
+                    </div>
+
+
+                    {/* General info */}
+                    <div className='mx-auto max-w-[80vw] flex flex-row  gap-4'>
+                        <Title title="Company Name" subTitle={company.companyName}></Title>
+                        <Title title="Price" subTitle={`${company.price} ${company.currency}`}></Title>
+                        <Title title="Industry" subTitle={`${company.industry}`}></Title>
+                    </div>
+
+                    <PeersGroupFinder
+                        ticker={ticker!}
+                        className='flex mx-auto max-w-[80vw] mt-4'
+                    />
+                </CompanyDashboard>
             ) : (
                 <Spinner />
             )}
-        </>
+        </div>
 
     );
 };

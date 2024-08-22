@@ -1,32 +1,45 @@
-import React from 'react' 
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import SidebarItem from './SidebarItem/SidebarItem';
+import './Sidebar.css'
 
 interface SidebarProps {
-    className: string;
-} 
+}
 
-const Sidebar: React.FC<SidebarProps> = ({ className }) => {
+const Sidebar: React.FC<SidebarProps> = () => {
+    const [selectedItem, setSelectedItem] = useState<string>();
+
     return (
-        <nav className={className}>
-            <Link to='company-profile'>
-                <h6>Company Profile</h6>
-            </Link>
+        <nav id='sidebar' className='flex flex-col '>
+            <SidebarItem
+                icon='bx bx-list-check' to='company-profile' title='Company Profile'
+                checked={selectedItem === 'company-profile'}
+                onClick={() => setSelectedItem('company-profile')}
+            />
 
-            <Link to='income-statement'>
-                <h6>Income Statement</h6>
-            </Link>
+            <SidebarItem
+                icon='bx bx-money-withdraw' to='income-statement' title='Income Statement'
+                checked={selectedItem === 'income-statement'}
+                onClick={() => setSelectedItem('income-statement')}
+            />
 
-            <Link to='balance-sheet'>
-                <h6>Balance Sheet</h6>
-            </Link>
+            <SidebarItem
+                icon='bx bx-spreadsheet' to='balance-sheet' title='Balance Sheet'
+                checked={selectedItem === 'balance-sheet'}
+                onClick={() => setSelectedItem('balance-sheet')}
+            />
 
-            <Link to='cashflow-statement'>
-                <h6>Cashflow Statement</h6>
-            </Link>
+            <SidebarItem
+                icon='bx bx-credit-card' to='cashflow-statement' title='Cashflow Statement'
+                checked={selectedItem === 'cashflow-statement'}
+                onClick={() => setSelectedItem('cashflow-statement')}
+            />
 
-            <Link to='historical-dividend'>
-                <h6>Historical Dividend</h6>
-            </Link>
+            <SidebarItem
+                icon='bx bx-history' to='historical-dividend' title='Historical Dividend'
+                checked={selectedItem === 'historical-dividend'}
+                onClick={() => setSelectedItem('historical-dividend')}
+            />
         </nav>
     );
 };

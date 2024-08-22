@@ -33,9 +33,9 @@ const CompanyFinder: React.FC<CompanyFinderProps> = ({ ticker, className }) => {
 
     return (
         <>
-            <div className={className}>
+            <div id='peers' className={className}>
                 {companyData ? (
-                    <div id='placeholder' className='flex gap-4  container pl-2 h-16 items-center overflow-y-hidden'>
+                    <div id='placeholder' className='flex gap-4 h-16 pl-4 items-center overflow-y-hidden'>
                         {companyData.peerList.map(ticker =>
                             <CompanyFinderItem id={ticker} key={uuidv4()} ticker={ticker} />
                         )}

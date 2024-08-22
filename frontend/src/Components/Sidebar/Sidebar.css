@@ -1,0 +1,40 @@
+#sidebar {
+    width: 5%;
+    overflow: hidden;
+    transition: width 0.5s ease, display 1s ease;
+}
+
+#sidebar span {
+    display: none;
+}
+
+#sidebar:hover + #label{
+    padding-left: 0.5rem;
+}
+
+#sidebar:hover {
+    width: 21%;
+}
+
+#sidebar:hover span{
+    display: contents;
+}
+
+@media only screen and (max-width: 850px) {
+    #sidebar {
+        width: 100%;
+        height: 3rem;
+        bottom: 0px;
+        flex-direction: row;
+    }
+
+    #sidebar:hover {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    #sidebar:hover {
+        width: 15%;
+    }
+}

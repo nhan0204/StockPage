@@ -6,3 +6,6 @@
 
 # Dashboard
 ![Dashboard](frontend/public/dashboard.png)
+
+# Sidebar
+![Sidebar](frontend/public/sidebar.png)

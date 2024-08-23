@@ -8,8 +8,8 @@
     display: none;
 }
 
-#sidebar:hover + #label{
-    padding-left: 0.5rem;
+#sidebar:hover label{
+    padding-left:3%;
 }
 
 #sidebar:hover {
@@ -34,6 +34,9 @@
 }
 
 @media only screen and (min-width: 1440px) {
+    #sidebar {
+        width: 4%;
+    }
     #sidebar:hover {
         width: 15%;
     }

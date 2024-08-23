@@ -44,11 +44,11 @@ const CompanyPage: React.FC<CompanyPageProps> = () => {
         <div id='company-page' className="relative flex">
             <Sidebar />
             {company ? (
-                <CompanyDashboard ticker={ticker!} className='h-[120vh]'>
+                <CompanyDashboard ticker={ticker!} className='h-[150vh]'>
                     <div id='description' className='relative flex justify-evenly'>
                         <CompanyLogo
                             ticker={ticker!}
-                            className='mt-12 mb-6 w-40 lg:w-64 xl:w-96'
+                            className='mt-12 mb-6 w-40 lg:w-64 xl:w-96 xl:pl-5'
                         />
                         <Description
                             description={company.description}

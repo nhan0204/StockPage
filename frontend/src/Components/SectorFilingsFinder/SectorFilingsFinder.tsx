@@ -8,9 +8,10 @@ import Tag from '../Tag/Tag';
 
 interface SectorFilingsProps {
     ticker: string | undefined;
+    className: string;
 }
 
-const SectorFilings: React.FC<SectorFilingsProps> = ({ ticker }) => {
+const SectorFilings: React.FC<SectorFilingsProps> = ({ ticker, className }) => {
     const [filingsData, setFilingsData] = useState<CompanySectorFilings[]>([]);
 
     const getSectorFillingsInit = async () => {
@@ -32,10 +33,10 @@ const SectorFilings: React.FC<SectorFilingsProps> = ({ ticker }) => {
 
 
     return (
-        <div className='flex flex-col'>
-            <Tag className='mb-4' head='Sector' tail='Fillings' />
+        <div className={`container  ${className}`}>
+            <Tag className='mb-1 pl-2' head='Sector' tail='Fillings' />
             {filingsData ? (
-                <div className='flex flex-col'>
+                <div className='flex flex-col max-w-fit py-2 pl-2 pr-4 bg-white shadow-xl rounded-xl'>
                     {filingsData?.slice(0, 5).map(sector =>
                         <SectorFilingsItem id={sector.symbol} key={uuidv4()} sector={sector} />
                     )}

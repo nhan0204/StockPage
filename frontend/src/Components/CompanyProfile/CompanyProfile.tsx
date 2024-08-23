@@ -10,8 +10,8 @@ const CompanyProfile: React.FC<CompanyProfileProps> = () => {
     console.log(ticker)
 
     return (
-        <div className='ml-10 mt-10'>
-            <SectorFilings ticker={ticker}/>
+        <div className='mx-auto mt-12 max-w-5xl h-full flex flex-col px-0 '>
+            <SectorFilings ticker={ticker} className='ml-5'/>
         </div>
     );
 };

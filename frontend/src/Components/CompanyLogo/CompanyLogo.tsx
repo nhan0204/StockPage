@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getCompanyLogo } from '../../api';
+import './CompanyLogo.css';
 
 interface CompanyLogoProps {
     ticker: string;
@@ -30,7 +31,7 @@ const CompanyLogo: React.FC<CompanyLogoProps> = ({ ticker, className }) => {
 
     return (
         <div className={className}>
-            {companyLogo ? <img className='w-full' alt='' src={companyLogo}/> : <div className='mx-0'></div>} 
+            {companyLogo ? <img className='image-enhanced' alt='' src={companyLogo}/> : <div className='mx-0'></div>} 
         </div>
     );
 };

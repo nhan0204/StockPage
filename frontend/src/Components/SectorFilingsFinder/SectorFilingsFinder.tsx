@@ -36,8 +36,8 @@ const SectorFilings: React.FC<SectorFilingsProps> = ({ ticker, className }) => {
         <div className={`container  ${className}`}>
             <Tag className='mb-1 pl-2' head='Sector' tail='Fillings' />
             {filingsData ? (
-                <div className='flex flex-col max-w-fit py-2 pl-2 pr-4 bg-white shadow-xl rounded-xl'>
-                    {filingsData?.slice(0, 5).map(sector =>
+                <div id='placeholder' className='flex flex-row w-full  py-2 pl-2 pr-4 bg-white shadow-xl rounded-xl overflow-x-auto'>
+                    {filingsData?.slice(0, 10).map(sector =>
                         <SectorFilingsItem id={sector.symbol} key={uuidv4()} sector={sector} />
                     )}
                 </div>

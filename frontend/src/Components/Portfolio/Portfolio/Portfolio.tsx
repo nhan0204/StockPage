@@ -2,6 +2,7 @@ import React, { SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { CompanyRealtimePrice } from '../../../company';
 import DeletePortfolio from '../DeletePortfolio/DeletePortfolio';
+import PortfolioItem from './PortfolioItem/PortfolioItem';
 
 interface PortfolioProps {
     id: string;
@@ -9,7 +10,8 @@ interface PortfolioProps {
     onPortfolioDelete: (e: SyntheticEvent) => void;
 }
 
-const Portfolio: React.FC<PortfolioProps> = ({ id, value,  onPortfolioDelete}) => {
+const Portfolio: React.FC<PortfolioProps> = ({ id, value, onPortfolioDelete }) => {
+    console.log(value);
     return (
         <div id={id} key={id} className='hover:scale-105 transform scale-100 transition-transform  duration-100 ease-out'>
             <div >
@@ -25,16 +27,17 @@ const Portfolio: React.FC<PortfolioProps> = ({ id, value,  onPortfolioDelete}) =
             </div>
             <div className='bg-darkCreame w-full container p-3 rounded-lg relative hover:shadow-xl hover:bg-creame'>
                 <ul className='font-sans list-disc'>
-                    <li className=' flex justify-between hover:scale-110  hover:font-semibold'>Ask price: <span>{value.askPrice}$</span> </li>
-                    <li className=' flex justify-between hover:scale-110  hover:font-semibold'>Bid price: <span>{value.bidPrice}$</span> </li>
-                    <li className=' flex justify-between hover:scale-110  hover:font-semibold'>FMP last: <span>{value.fmpLast}$</span> </li>
-                    <li className=' flex justify-between hover:scale-110  hover:font-semibold'>Sale price: <span>{value.lastSalePrice}$</span> </li>
-                    <li className=' flex justify-between hover:scale-110  hover:font-semibold'>Ask size: <span>{value.askSize}</span> </li>
-                    <li className=' flex justify-between hover:scale-110  hover:font-semibold'>Bid size: <span>{value.bidSize}</span> </li>
-                    <li className=' flex justify-between hover:scale-110  hover:font-semibold'>Sale size: <span>{value.lastSaleSize}</span> </li>
-                    <li className=' flex justify-between hover:scale-110  hover:font-semibold'>Volume: <span>{value.volume}</span> </li>
-                </ul>  
-            </div>    
+                    <PortfolioItem monetary={true} label='Ask price' value={value.askPrice} />
+                    <PortfolioItem monetary={true} label='Bid price' value={value.bidPrice} />
+                    <PortfolioItem monetary={true} label='FMP last' value={value.fmpLast} />
+                    <PortfolioItem monetary={true} label='Sale price' value={value.lastSalePrice} />
+                    <PortfolioItem monetary={false} label='Bid size' value={value.bidSize} />
+                    <PortfolioItem monetary={false} label='Sale size' value={value.lastSaleSize} />
+                    <PortfolioItem monetary={false} label='Volume' value={value.volume} />
+                    <PortfolioItem monetary={false} label='Saletime' value={value.lastSaleTime} />
+                    <PortfolioItem monetary={false} label='Updated' value={value.lastUpdated} />
+                </ul>
+            </div>
         </div>
     )
 }

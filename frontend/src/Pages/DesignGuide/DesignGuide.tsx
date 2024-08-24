@@ -22,7 +22,7 @@ const DesignGuide: React.FC<DesignGuideProps> = () => {
     return (
         <>
             <Tag className='ml-40 mt-12' head='Design Guide' tail='There are reusable components  with brief instructions'/>
-            <Table className='mx-auto max-w-fit' configs={config} data={data}/>
+            <Table className='ml-40 max-w-fit mt-12' configs={config} data={data}/>
         </>
     );
 };

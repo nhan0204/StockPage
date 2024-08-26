@@ -1,11 +1,12 @@
 import React from 'react' 
+import Tag from '../Tag/Tag';
 
 interface CashflowStatementProps {} 
 
 const CashflowStatement: React.FC<CashflowStatementProps> = () => {
     return (
         <>
-            CashflowStatement
+            <Tag head='Cashflow' tail='Statement' className='ml-8'/>
         </>
     );
 };

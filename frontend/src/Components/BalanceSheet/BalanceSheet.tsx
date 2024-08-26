@@ -1,11 +1,13 @@
 import React from 'react' 
+import Tag from '../Tag/Tag';
 
 interface BalanceSheetProps {} 
 
 const BalanceSheet: React.FC<BalanceSheetProps> = () => {
     return (
         <>
-            BalanceSheet
+            <Tag head='Balance' tail='Sheet' className='ml-8'/>
+            
         </>
     );
 };

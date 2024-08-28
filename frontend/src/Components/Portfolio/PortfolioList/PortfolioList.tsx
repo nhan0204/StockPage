@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react'
+import React, { SyntheticEvent, useEffect, useRef, useState } from 'react'
 import './PortfolioList.css'
 import { CompanyRealtimePrice } from '../../../company'
 import Portfolio from '../Portfolio/Portfolio';
@@ -10,6 +10,23 @@ interface PortfolioListProps {
 }
 
 const PortfolioList: React.FC<PortfolioListProps> = ({ portfolioValues, onPortfolioDelete }) => {
+    const [portfolioList, setPortfoliosList] = useState<CompanyRealtimePrice[]>([]);
+
+    useEffect(() => {
+        setPortfoliosList(portfolioValues);
+    }, [portfolioValues])
+
+    const dragPortfolio = useRef<number>(0);
+    const dragOverPortfolio = useRef<number>(0);
+
+    const handleSort = () => {
+        const portfolioSwapOrder = [...portfolioValues];
+        const temp = portfolioSwapOrder[dragPortfolio.current];
+        portfolioSwapOrder[dragPortfolio.current] = portfolioSwapOrder[dragOverPortfolio.current];
+        portfolioSwapOrder[dragOverPortfolio.current] = temp;
+        setPortfoliosList(portfolioSwapOrder);
+    }
+
     return (
         <section id='portfolio' className='flex flex-col items-center mt-8'>
             <div className='container max-w-[95%] md:max-w-xl lg:max-w-3xl xl:max-w-6xl'>
@@ -19,12 +36,15 @@ const PortfolioList: React.FC<PortfolioListProps> = ({ portfolioValues, onPortfo
                 </h2>
                 {/* Portfolio List */}
                 <div className='bg-dark rounded-2xl py-4 px-6 mt-4'>
-                    {portfolioValues.length > 0 ? (
+                    {portfolioList.length > 0 ? (
                         <div className='container max-w-sm mx-auto p-0 gap-3 grid grid-cols-2 md:max-w-xl md:grid-cols-3 lg:max-w-3xl lg:grid-cols-4 xl:grid-cols-6 xl:max-w-6xl xl:mt-6 xl:gap-4'>
-                            {portfolioValues.map(value =>
+                            {portfolioList.map((value, index) =>
                                 <Portfolio
                                     id={value.symbol} key={uuidv4()} value={value}
                                     onPortfolioDelete={onPortfolioDelete}
+                                    onDragStart={() => dragPortfolio.current = index}
+                                    onDragEnter={() => dragOverPortfolio.current = index}
+                                    onDragEnd={handleSort}
                                 />
                             )}
                         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 type config = {
     label: string;
-    render: (company: any) => void;
+    render: (company: any) => any;
 }
 
 interface TableProps {

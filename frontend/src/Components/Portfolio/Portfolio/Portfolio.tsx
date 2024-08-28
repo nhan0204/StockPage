@@ -8,12 +8,21 @@ interface PortfolioProps {
     id: string;
     value: CompanyRealtimePrice;
     onPortfolioDelete: (e: SyntheticEvent) => void;
+    onDragStart: (e: SyntheticEvent) => void;
+    onDragEnter: (e: SyntheticEvent) => void;
+    onDragEnd: (e: SyntheticEvent) => void;
 }
 
-const Portfolio: React.FC<PortfolioProps> = ({ id, value, onPortfolioDelete }) => {
+const Portfolio: React.FC<PortfolioProps> = ({ id, value, onPortfolioDelete, onDragStart, onDragEnter, onDragEnd }) => {
     console.log(value);
     return (
-        <div id={id} key={id} className='hover:scale-105 transform scale-100 transition-transform  duration-100 ease-out'>
+        <div id={id} key={id} className='hover:scale-105 transform scale-100 transition-transform  duration-100 ease-out'
+            draggable
+            onDragOver={e => e.preventDefault()}
+            onDragStart={onDragStart}
+            onDragEnter={onDragEnter}
+            onDragEnd={onDragEnd}
+        >
             <div >
                 <h2 className='text-darkCreame ml-2 font-compagnon font-semibold text-lg flex justify-between hover:creame'>
                     <Link className='hover:opacity-70' to={`/company/${value.symbol}`} type='button'>

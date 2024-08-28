@@ -61,7 +61,7 @@ const SearchPage: React.FC<SearchPageProps> = () => {
     const onPortfolioCreate = (e: any) => {
         e.preventDefault();
         try {
-            const newPortfolio = JSON.parse(e.target[0].value);
+            const newPortfolio: CompanyRealtimePrice = JSON.parse(e.target[0].value);
 
             if (portfolioValues.find(value => value.symbol === newPortfolio.symbol))
                 return;

@@ -1,7 +1,7 @@
 #sidebar {
     width: 5%;
     overflow: hidden;
-    transition: width 0.5s ease, display 1s ease;
+    transition: width 0.5s ease, display 1s ease-in-out;
 }
 
 #sidebar span {

@@ -1,4 +1,6 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import './Table.css';
 
 type config = {
     label: string;
@@ -14,26 +16,28 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ configs, data, className }) => {
 
     const renderHeaders = configs.map((config: config) =>
-        <th className='p-4 text-white text-left text-md font-semibold font-roboto  tracking-wider' key={config.label}>
+        <th className={`whitespace-normal lg:whitespace-nowrap p-4 text-white text-left text-sm lg:text-md font-semibold font-roboto  tracking-wider`} key={config.label}>
             {config.label}
         </th>
     );
 
-    const renderRows = data.map((company: any) =>
-        <tr key={company.cik}>
-            {configs.map((value: any) =>
-                <td className='p-3 '>{value.render(company)}</td>
+    const renderRows = data.map((company: any) => 
+        <tr key={`${company.cik}-${uuidv4()}`} className='whitespace-nowrap hover:cursor-pointer hover:font-bold hover:bg-slate-200 hover:shadow-white hover:shadow-lg transition-color duration-75 ease'>
+            {configs.map((config: config) =>
+                <td className='px-5 py-4 lg:py-2 lg:px-4 xl:py-4 xl:px-5  min-w-fit' key={uuidv4()}>
+                    {config.render(company)}
+                </td>
             )}
         </tr>
     )
 
     return (
-        <div className={`${className} bg-white shadow-xl rounded-xl overflow-hidden `}>
-            <table className='max-w-fit'>
-                <thead className='bg-dark'>
+        <div className={`${className} bg-white shadow-xl rounded-xl overflow-x-auto `}>
+            <table className='w-full'>
+                <thead className='bg-dark opacity-95'>
                     <tr className='rounded-t-xl'>{renderHeaders}</tr>
                 </thead>
-                <tbody className='w-[80%] border-t-0 border-2 border-gray-50'>{renderRows}</tbody>
+                <tbody>{renderRows}</tbody>
             </table>
             
         </div>

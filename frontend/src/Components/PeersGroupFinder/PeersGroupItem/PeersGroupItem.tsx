@@ -15,7 +15,7 @@ const CompanyFinderItem: React.FC<CompanyFinderItemProps> = ({ id, ticker }) => 
                 id={id}
                 key={id}
                 reloadDocument
-                to={`/company/${ticker}`}   
+                to={`/company/${ticker}/company-profile`}   
                 type='button'
                 className='text-lg text-white '
             >

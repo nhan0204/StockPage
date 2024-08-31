@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react'
+import React, { SyntheticEvent } from 'react';
 import { CompanyRealtimePrice } from '../../../company';
 import "./DeletePortfolio.css";
 

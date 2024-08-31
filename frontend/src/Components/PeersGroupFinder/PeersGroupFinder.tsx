@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { getCompanyPeerGroup } from '../../api';
+import { getCompanyPeerGroup } from '../../Services/api';
 import { CompanyPeerGroup } from '../../company';
 import Spinner from '../Spinner/Spinner';
-import CompanyFinderItem from './PeersGroupItem/PeersGroupItem';
 import './PeersGroupFinder.css';
+import CompanyFinderItem from './PeersGroupItem/PeersGroupItem';
 
 interface CompanyFinderProps {
     ticker: string;
@@ -14,21 +14,22 @@ interface CompanyFinderProps {
 const CompanyFinder: React.FC<CompanyFinderProps> = ({ ticker, className }) => {
     const [companyData, setCompanyData] = useState<CompanyPeerGroup>();
 
-    const getPeerGroupInit = async (ticker: string) => {
-        if (typeof ticker === "undefined") return;
-
-        const result = await getCompanyPeerGroup(ticker);
-
-        if (typeof result === "string") {
-            console.log("api error: ", result);
-        } else if (Array.isArray(result.data)) {
-            const peerList = result.data.filter(company => company != ticker);
-            setCompanyData({ peerList: peerList });
-        }
-    }
-
     useEffect(() => {
+        const getPeerGroupInit = async (ticker: string) => {
+            if (typeof ticker === "undefined") return;
+    
+            const result = await getCompanyPeerGroup(ticker);
+    
+            if (typeof result === "string") {
+                console.log("api error: ", result);
+            } else if (Array.isArray(result.data)) {
+                const peerList = result.data.filter(company => company !== ticker);
+                setCompanyData({ peerList: peerList });
+            }
+        }
+
         getPeerGroupInit(ticker);
+
     }, [ticker]);
 
     return (

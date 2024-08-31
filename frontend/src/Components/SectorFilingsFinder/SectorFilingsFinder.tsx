@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { getCompanySectorFilings } from '../../api';
+import { v4 as uuidv4 } from 'uuid';
+import { getCompanySectorFilings } from '../../Services/api';
 import { CompanySectorFilings } from '../../company';
 import Spinner from '../Spinner/Spinner';
-import SectorFilingsItem from './SectorFilingsItem/SectorFilingsItem';
-import { v4 as uuidv4 } from 'uuid';
 import Tag from '../Tag/Tag';
+import SectorFilingsItem from './SectorFilingsItem/SectorFilingsItem';
 
 interface SectorFilingsProps {
     ticker: string | undefined;
@@ -14,20 +14,20 @@ interface SectorFilingsProps {
 const SectorFilings: React.FC<SectorFilingsProps> = ({ ticker, className }) => {
     const [filingsData, setFilingsData] = useState<CompanySectorFilings[]>([]);
 
-    const getSectorFillingsInit = async () => {
-        if (typeof ticker === "undefined")
-            return;
-
-        const result = await getCompanySectorFilings(ticker);
-
-        if (typeof result === "string") {
-            console.log("Server error: ", result);
-        } else if (Array.isArray(result.data)) {
-            setFilingsData(result.data);
-        }
-    }
-
     useEffect(() => {
+        const getSectorFillingsInit = async () => {
+            if (typeof ticker === "undefined")
+                return;
+    
+            const result = await getCompanySectorFilings(ticker);
+    
+            if (typeof result === "string") {
+                console.log("Server error: ", result);
+            } else if (Array.isArray(result.data)) {
+                setFilingsData(result.data);
+            }
+        }
+
         getSectorFillingsInit();
     }, [ticker])
 

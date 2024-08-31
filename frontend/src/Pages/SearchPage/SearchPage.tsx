@@ -1,12 +1,11 @@
 import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
-import { getCompanyLogo, getCompanyPrice, searchCompanies } from '../../api';
-import { CompanyRealtimePrice, CompanySearch } from '../../company';
 import CardList from '../../Components/CardList/CardList';
+import NotFound from '../../Components/Errors/NotFound/NotFound';
 import PortfolioList from '../../Components/Portfolio/PortfolioList/PortfolioList';
 import Search from '../../Components/Search/Search';
 import Spinner from '../../Components/Spinner/Spinner';
-import NotFound from '../../Components/Errors/NotFound/NotFound';
-import Navbar from '../../Components/Navbar/Navbar';
+import { getCompanyPrice, searchCompanies } from '../../Services/api';
+import { CompanyRealtimePrice, CompanySearch } from '../../company';
 
 interface SearchPageProps { }
 

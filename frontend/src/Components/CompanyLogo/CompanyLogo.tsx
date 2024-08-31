@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCompanyLogo } from '../../api';
+import { getCompanyLogo } from '../../Services/api';
 import './CompanyLogo.css';
 
 interface CompanyLogoProps {

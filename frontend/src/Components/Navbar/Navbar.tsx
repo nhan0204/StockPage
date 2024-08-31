@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './stock.png';
+import logo from '../../Assets/stock.png';
 import { Link } from 'react-router-dom';
 
 interface NavbarProps { }

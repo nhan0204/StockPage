@@ -4,5 +4,5 @@ export const formatDate = (dateString: string) => {
     if (typeof date === 'undefined') 
         return;
 
-    return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    return date.toLocaleDateString(undefined, { year:'numeric', month: 'short', day: 'numeric' });
 }

@@ -1,8 +1,8 @@
-import React, { SyntheticEvent, useEffect, useRef, useState } from 'react'
-import './PortfolioList.css'
-import { CompanyRealtimePrice } from '../../../company'
-import Portfolio from '../Portfolio/Portfolio';
+import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { CompanyRealtimePrice } from '../../../company';
+import Portfolio from '../Portfolio/Portfolio';
+import './PortfolioList.css';
 
 interface PortfolioListProps {
     portfolioValues: CompanyRealtimePrice[];
@@ -37,7 +37,7 @@ const PortfolioList: React.FC<PortfolioListProps> = ({ portfolioValues, onPortfo
                 {/* Portfolio List */}
                 <div className='bg-dark rounded-2xl py-4 px-6 mt-4'>
                     {portfolioList.length > 0 ? (
-                        <div className='container max-w-sm mx-auto p-0 gap-3 grid grid-cols-2 md:max-w-xl md:grid-cols-3 lg:max-w-3xl lg:grid-cols-4 xl:grid-cols-6 xl:max-w-6xl xl:mt-6 xl:gap-4'>
+                        <div className='container max-w-sm mx-auto p-0 gap-3 grid grid-cols-2 sm:max-w-xl sm:grid-cols-3 lg:max-w-3xl lg:grid-cols-4 xl:grid-cols-6 xl:max-w-6xl xl:mt-6 xl:gap-4'>
                             {portfolioList.map((value, index) =>
                                 <Portfolio
                                     id={value.symbol} key={uuidv4()} value={value}

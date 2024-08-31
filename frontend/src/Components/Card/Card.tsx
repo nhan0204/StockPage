@@ -1,8 +1,8 @@
 import React, { SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { CompanySearch } from '../../company';
-import AddPortfolio from '../Portfolio/AddPortfolio/AddPortfolio';
 import CompanyLogo from '../CompanyLogo/CompanyLogo';
+import AddPortfolio from '../Portfolio/AddPortfolio/AddPortfolio';
 
 interface CardProps {
     id: string;
@@ -20,7 +20,7 @@ const Card: React.FC<CardProps> = ({ id, searchResult, onPortfolioCreate }) => {
             <div className='space-y-3'>
                 <CompanyLogo ticker={searchResult.symbol} className='w-16 mt-2 mb-3'/>
 
-                <Link to={`/company/${searchResult.symbol}`} className='text-balance font-semibold hover:opacity-70'>
+                <Link to={`/company/${searchResult.symbol}/company-profile`} className='text-balance font-semibold hover:opacity-70'>
                     {searchResult.name} ({searchResult.symbol})
                 </Link>
             </div>

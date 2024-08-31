@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { CompanySectorFilings } from '../../../company';
-import './SectorFilingsItem.css';
 import { Link } from 'react-router-dom';
-import { formatDate } from '../../../Helpers/DateFormatting';
+import { CompanySectorFilings } from '../../../company';
+import { formatDate } from '../../../Utils/Helpers/DateFormatting';
+import './SectorFilingsItem.css';
 
 interface SectorFilingsItemProps {
     id: string;

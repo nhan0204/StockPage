@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
 import SidebarItem from './SidebarItem/SidebarItem';
 import './Sidebar.css'
+import { useOutlet, useOutletContext } from 'react-router';
 
 interface SidebarProps {
 }

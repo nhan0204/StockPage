@@ -34,7 +34,7 @@ const CompanyPage: React.FC<CompanyPageProps> = () => {
     }, [ticker]);
 
     return (
-        <div id='company-page' className="relative flex overflow-y-auto">
+        <div id='company-page' className="relative flex">
             <Sidebar />
             {company ? (
                 <CompanyDashboard ticker={ticker!} className='h-max'>

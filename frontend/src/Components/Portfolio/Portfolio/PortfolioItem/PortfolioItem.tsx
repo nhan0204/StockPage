@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatLargeMonetaryNumber, formatLargeNonMonetaryNumber } from '../../../../Utils/Helpers/NumberFormatting';
+import { formatLargeMonetaryNumber, formatLargeNonMonetaryNumber } from '../../../../Helpers/NumberFormatting';
 
 interface PortfolioItemProps {
     label: string;

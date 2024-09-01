@@ -178,7 +178,7 @@ export interface CompanyIncomeStatement {
     finalLink: string;
 }
 
-interface CompanyBalanceSheet {
+export interface CompanyBalanceSheet {
     date: string;
     symbol: string;
     reportedCurrency: string;
@@ -235,7 +235,7 @@ interface CompanyBalanceSheet {
     finalLink: string;
 }
 
-interface CompanyCashflowStatement {
+export interface CompanyCashflowStatement {
     date: string;
     symbol: string;
     reportedCurrency: string;
@@ -278,23 +278,22 @@ interface CompanyCashflowStatement {
     finalLink: string;
 }
 
-interface MetaData {
+export interface MetaData {
     Information: string;
     Symbol: string;
     LastRefreshed: string;
     TimeZone: string;
-  }
-  
-  interface WeeklyTimeSeries {
-    open: number;
-    high: number;
-    low: number;
-    close: number;
-    volume: number;
-  }
-  
-  interface CompanyWeeklyDividend {
-    MetaData: MetaData;
-    WeeklyTimeSeries: Record<string, WeeklyTimeSeries>;
-  }
-  
+}
+
+export interface WeeklyTimeSeries {
+    "1. open": number
+    "2. high": number
+    "3. low": number
+    "4. close": number
+    "5. volume": number
+}
+
+export interface CompanyWeeklyDividend {
+    "Meta Data": MetaData;
+    "Weekly Time Series": Record<string, WeeklyTimeSeries>;
+}

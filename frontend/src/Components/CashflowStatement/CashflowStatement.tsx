@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router';
 import { CompanyCashflowStatement } from '../../company';
+import { formatDate } from '../../Helpers/DateFormatting';
+import { formatLargeMonetaryNumber } from '../../Helpers/NumberFormatting';
 import { getCashflowStatement } from '../../Services/api';
-import { formatDate } from '../../Utils/Helpers/DateFormatting';
-import { formatLargeMonetaryNumber } from '../../Utils/Helpers/NumberFormatting';
 import Spinner from '../Spinner/Spinner';
 import Table from '../Table/Table';
 import Tag from '../Tag/Tag';

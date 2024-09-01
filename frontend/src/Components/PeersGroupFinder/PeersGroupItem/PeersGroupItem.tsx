@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import CompanyLogo from '../../CompanyLogo/CompanyLogo';
 
 interface CompanyFinderItemProps {
@@ -8,6 +8,14 @@ interface CompanyFinderItemProps {
 }
 
 const CompanyFinderItem: React.FC<CompanyFinderItemProps> = ({ id, ticker }) => {
+    const location = useLocation();
+    const [page, setPage] = useState<string>();
+
+    useEffect(() => {
+        const path = location.pathname.split('/').pop();
+        setPage(path!);
+    }, [location.pathname]);
+
     return (
         <div className='max-h-10 flex items-center gap-1 bg-slate-700 max-w-22 py-1 px-3 rounded-full cursor-pointer hover:opacity-80 hover:scale-125 transform transition-transform scale-100 duration-200 ease-in-out'>
             <CompanyLogo className='w-6' ticker={ticker}/>
@@ -15,7 +23,7 @@ const CompanyFinderItem: React.FC<CompanyFinderItemProps> = ({ id, ticker }) => 
                 id={id}
                 key={id}
                 reloadDocument
-                to={`/company/${ticker}/company-profile`}   
+                to={`/company/${ticker}/${page}`}   
                 type='button'
                 className='text-lg text-white '
             >

@@ -1,13 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import './Sidebar.css';
 import SidebarItem from './SidebarItem/SidebarItem';
-import './Sidebar.css'
-import { useOutlet, useOutletContext } from 'react-router';
+import { useLocation } from 'react-router';
 
 interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = () => {
-    const [selectedItem, setSelectedItem] = useState<string>();
+    const location = useLocation();
+    const [selectedItem, setSelectedItem] = useState<string>('company-profile');
+
+    useEffect(() => {
+        const path = location.pathname.split('/').pop();
+        setSelectedItem(path!);
+    }, [location.pathname])
 
     return (
         <nav id='sidebar' className='flex flex-col '>

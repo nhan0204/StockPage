@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router';
 import { CompanyKeyMetrics } from '../../company';
+import { formatLargeNonMonetaryNumber, formatRatio } from '../../Helpers/NumberFormatting';
 import { getKeyMetrics } from '../../Services/api';
-import { formatLargeNonMonetaryNumber, formatRatio } from '../../Utils/Helpers/NumberFormatting';
 import RatioList from '../RatioList/RatioList';
 import SectorFilings from '../SectorFilingsFinder/SectorFilingsFinder';
 

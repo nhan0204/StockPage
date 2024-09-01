@@ -24,7 +24,7 @@ const Table: React.FC<TableProps> = ({ configs, data, className }) => {
     const renderRows = data.map((company: any) => 
         <tr key={`${company.cik}-${uuidv4()}`} className='whitespace-nowrap hover:cursor-pointer hover:font-bold hover:bg-slate-200 hover:shadow-white hover:shadow-lg transition-color duration-75 ease'>
             {configs.map((config: config) =>
-                <td className='px-5 py-4 lg:py-2 lg:px-4 xl:py-4 xl:px-5  min-w-fit' key={uuidv4()}>
+                <td className='px-5 py-4 lg:py-3 lg:px-3 xl:py-4 xl:px-5  min-w-fit' key={uuidv4()}>
                     {config.render(company)}
                 </td>
             )}
@@ -32,7 +32,7 @@ const Table: React.FC<TableProps> = ({ configs, data, className }) => {
     )
 
     return (
-        <div className={`${className} bg-white shadow-xl rounded-xl overflow-x-auto `}>
+        <div id='table' className={`${className} bg-white shadow-xl rounded-xl overflow-x-auto `}>
             <table className='w-full'>
                 <thead className='bg-dark opacity-95'>
                     <tr className='rounded-t-xl'>{renderHeaders}</tr>

@@ -1,17 +1,17 @@
-::-webkit-scrollbar {
+#table::-webkit-scrollbar {
     height: .5rem;
 }
 
-::-webkit-scrollbar-track {
+#table::-webkit-scrollbar-track {
     background: transparent; 
 }
 
-::-webkit-scrollbar-thumb {
+#table::-webkit-scrollbar-thumb {
     background: transparent;
     width: 0.1rem;
 }
 
-::-webkit-scrollbar-thumb:hover {
+#table::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.7); 
     cursor: pointer;
 }

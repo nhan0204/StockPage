@@ -1,5 +1,5 @@
 import { CompanyBalanceSheet, CompanyCashflowStatement, CompanyIncomeStatement, CompanyKeyMetrics, CompanyPeerGroup, CompanyProfile, CompanyRealtimePrice, CompanySearch, CompanySectorFilings, CompanyWeeklyDividend } from "../company";
-import { fetchData } from "../Utils/Helpers/DataFetching";
+import { fetchData } from "../Helpers/DataFetching";
 
 const alphaApiKey = process.env.REACT_APP_ALPHA_API_KEY;
 const finPrepApiKey = process.env.REACT_APP_FIN_PREP_API_KEY;

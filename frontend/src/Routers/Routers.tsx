@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         ],
     },
 ],
-{
-    basename: "/StockPage/"
-}
+// {
+//     basename: "/StockPage/"
+// }
 );

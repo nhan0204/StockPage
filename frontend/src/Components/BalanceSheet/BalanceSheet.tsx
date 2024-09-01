@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router';
 import { CompanyBalanceSheet } from '../../company';
+import { formatLargeMonetaryNumber } from '../../Helpers/NumberFormatting';
 import { getBalanceSheet } from '../../Services/api';
-import { formatLargeMonetaryNumber } from '../../Utils/Helpers/NumberFormatting';
 import RatioList from '../RatioList/RatioList';
 import Spinner from '../Spinner/Spinner';
 import Tag from '../Tag/Tag';

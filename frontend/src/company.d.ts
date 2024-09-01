@@ -285,15 +285,15 @@ export interface MetaData {
     TimeZone: string;
 }
 
-export interface WeeklyTimeSeries {
+export interface TimeSeries {
     "1. open": number
     "2. high": number
     "3. low": number
     "4. close": number
-    "5. volume": number
+    "6. volume": number
 }
 
-export interface CompanyWeeklyDividend {
+export interface CompanyDividend {
     "Meta Data": MetaData;
-    "Weekly Time Series": Record<string, WeeklyTimeSeries>;
+    "Time Series (Daily)": Record<string, TimeSeries>;
 }

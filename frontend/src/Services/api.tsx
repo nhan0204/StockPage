@@ -1,4 +1,4 @@
-import { CompanyBalanceSheet, CompanyCashflowStatement, CompanyIncomeStatement, CompanyKeyMetrics, CompanyPeerGroup, CompanyProfile, CompanyRealtimePrice, CompanySearch, CompanySectorFilings, CompanyWeeklyDividend } from "../company";
+import { CompanyBalanceSheet, CompanyCashflowStatement, CompanyDividend, CompanyIncomeStatement, CompanyKeyMetrics, CompanyPeerGroup, CompanyProfile, CompanyRealtimePrice, CompanySearch, CompanySectorFilings } from "../company";
 import { fetchData } from "../Helpers/DataFetching";
 
 const alphaApiKey = process.env.REACT_APP_ALPHA_API_KEY;
@@ -110,11 +110,12 @@ export const getCashflowStatement = async (query: string) => {
 }
 
 interface GetWeaklyDividendResponse {
-    data: CompanyWeeklyDividend[];
+    data: CompanyDividend[];
 }
 
 export const getWeaklyDividend = async(query: string) => {
-    const request = `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=${query}&apikey=${alphaApiKey}`;
+    // const request = `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=${query}&apikey=${alphaApiKey}`;
+    const request = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=TSCO.LON&outputsize=full&apikey=demo`;
     const response = await fetchData<GetWeaklyDividendResponse>(request);
     return response;
 }

@@ -27,7 +27,7 @@ const CompanyLogo: React.FC<CompanyLogoProps> = ({ ticker, className }) => {
 
     useEffect(() => {
         getCompanyLogoInit();
-    }, [companyLogo])
+    }, [ticker])
 
     return (
         <div className={className}>

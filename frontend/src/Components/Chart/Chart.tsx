@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { formatStockData } from '../../Helpers/StockDataFormatting';
 import ChartFilter from './ChartFilter/ChartFilter';
+import { ChartFilterKeys } from './ChartConfigs';
 
 interface ChartProps {
     className: string;
@@ -9,7 +10,7 @@ interface ChartProps {
 }
 
 const Chart: React.FC<ChartProps> = ({ className, stockData }) => {
-    const [filter, setFilter] = useState<any>("1W");
+    const [filter, setFilter] = useState<ChartFilterKeys>("1W");
     const seriesData = useMemo(() => formatStockData(filter, stockData), [stockData, filter]);
 
     return (

@@ -16,8 +16,11 @@ const HistoricalDividend: React.FC<HistoricalDividendProps> = () => {
         const getCompanyWeaklyDividend = async () => {
             const result = await getWeaklyDividend(ticker);
 
+            
             if (typeof result === 'string') {
-                throw new Error(`Failed to get weakly dividend: ${result}`);
+                console.error(`Failed to get weakly dividend: ${result}`);
+            } else if("Information" in result.data) {
+                console.error(`API limit reached: ${result.data["Information"]}`)
             } else {
                 setHistoricalDividend(result.data);
             }

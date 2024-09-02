@@ -14,7 +14,6 @@ interface PortfolioProps {
 }
 
 const Portfolio: React.FC<PortfolioProps> = ({ id, value, onPortfolioDelete, onDragStart, onDragEnter, onDragEnd }) => {
-    console.log(value);
     return (
         <div id={id} key={id} className='hover:scale-105 transform scale-100 transition-transform  duration-100 ease-out'
             draggable

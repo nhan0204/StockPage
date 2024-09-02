@@ -290,7 +290,7 @@ export interface TimeSeries {
     "2. high": number
     "3. low": number
     "4. close": number
-    "6. volume": number
+    "5. volume": number
 }
 
 export interface CompanyDividend {

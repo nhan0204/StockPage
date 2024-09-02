@@ -114,8 +114,8 @@ interface GetWeaklyDividendResponse {
 }
 
 export const getWeaklyDividend = async(query: string) => {
-    // const request = `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=${query}&apikey=${alphaApiKey}`;
-    const request = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=TSCO.LON&outputsize=full&apikey=demo`;
+    // const request = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${query}&outputsize=full&apikey=${alphaApiKey}`;
+    const request = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo`;
     const response = await fetchData<GetWeaklyDividendResponse>(request);
     return response;
 }

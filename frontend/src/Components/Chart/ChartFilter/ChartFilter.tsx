@@ -1,10 +1,10 @@
 import React, { SyntheticEvent, useState } from 'react'
 import ChartFilterItem from './ChartFilterItem/ChartFilterItem';
-import { chartConfigs } from '../ChartConfigs';
+import { chartConfigs, ChartFilterKeys } from '../ChartConfigs';
 
 interface ChartFilterProps {
     filter: string;
-    setFilter: React.Dispatch<React.SetStateAction<string>>;
+    setFilter: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const ChartFilter: React.FC<ChartFilterProps> = ({filter, setFilter}) => {

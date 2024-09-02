@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import App from "../App";
 import BalanceSheet from "../Components/BalanceSheet/BalanceSheet";
 import CashflowStatement from "../Components/CashflowStatement/CashflowStatement";
@@ -10,7 +10,7 @@ import DesignGuide from "../Pages/DesignGuide/DesignGuide";
 import HomePage from "../Pages/HomePage/HomePage";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
     {
         path: "/",
         element: <App />,
@@ -27,13 +27,9 @@ export const router = createBrowserRouter([
                     { path: "balance-sheet", element: <BalanceSheet /> },
                     { path: "cashflow-statement", element: <CashflowStatement /> },
                     { path: "historical-dividend", element: <HistoricalDividend /> },
-                    { path: "company/:ticker", element: <CompanyPage/>}
                 ]            
             }
         ],
     },
 ],
-// {
-//     basename: "/StockPage/"
-// }
 );

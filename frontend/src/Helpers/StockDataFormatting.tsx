@@ -1,16 +1,13 @@
 import { CompanyDividend } from "../company";
-import { chartConfigs } from "../Components/Chart/ChartConfigs";
+import { chartConfigs, ChartFilterKeys } from "../Components/Chart/ChartConfigs";
 
 interface Candle {
     x: string;
     y: [number, number, number, number, number];
 }
 
-type key = keyof typeof chartConfigs;
-
-export const formatStockData = (filter: key, stockData: CompanyDividend) => {
+export const formatStockData = (filter: ChartFilterKeys, stockData: CompanyDividend) => {
     const formattedData: Candle[] = [];
-
     if (stockData["Time Series (Daily)"]) {
         Object.entries(
             stockData["Time Series (Daily)"]
@@ -23,7 +20,7 @@ export const formatStockData = (filter: key, stockData: CompanyDividend) => {
                         value["2. high"],
                         value["3. low"],
                         value["4. close"],
-                        value["6. volume"],
+                        value["5. volume"],
                     ]
                 })
             }

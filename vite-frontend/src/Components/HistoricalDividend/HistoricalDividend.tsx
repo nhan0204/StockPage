@@ -12,7 +12,7 @@ const HistoricalDividend: React.FC<HistoricalDividendProps> = () => {
     const [historicalDividend, setHistoricalDividend] = useState<any>();
 
     useEffect(() => {
-        const getCompanyWeaklyDividend = async () => {
+        const getCompanyDailyDividend = async () => {
             const result = await getDailyDividend(ticker);
 
             
@@ -25,7 +25,7 @@ const HistoricalDividend: React.FC<HistoricalDividendProps> = () => {
             }
         }
 
-        getCompanyWeaklyDividend();
+        getCompanyDailyDividend();
     }, [ticker]);
 
     return (

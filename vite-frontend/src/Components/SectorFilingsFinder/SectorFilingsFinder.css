@@ -1,0 +1,17 @@
+#placeholder::-webkit-scrollbar {
+    height: .5rem;
+}
+
+#placeholder::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+#placeholder::-webkit-scrollbar-thumb {
+    background: transparent;
+    width: 0.1rem;
+}
+
+#placeholder::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); 
+    cursor: pointer;
+}

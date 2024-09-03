@@ -1,0 +1,17 @@
+#table::-webkit-scrollbar {
+    height: .5rem;
+}
+
+#table::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+#table::-webkit-scrollbar-thumb {
+    background: transparent;
+    width: 0.1rem;
+}
+
+#table::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); 
+    cursor: pointer;
+}

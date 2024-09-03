@@ -1,0 +1,56 @@
+#head::before {
+    position: absolute;
+    content: "expand_more";
+    font-family: "Material Icons";
+    top: 50%;
+    right: .2rem;
+    font-size: 2rem;
+
+    transform: translate(0, -50%);
+    transition: transform 0.7s ease, content 0.7s ease;
+}
+
+#content {
+    margin: auto;
+    overflow: auto;
+    width:90%;
+    transition: max-height 1s ease, visibility 1s ease;
+}
+
+#content > span {
+    padding: 1rem;
+}
+
+
+#toggle:not(:checked) ~ #content{
+    max-height: 0px;
+    visibility: hidden;
+} 
+
+#toggle:checked + #head::before {
+    transform: translate(0, -50%) rotate(-180deg);
+}
+
+
+#toggle:checked + #head {
+    background-color: rgba(50,48,59,255);
+    color: white;
+}
+
+#content::-webkit-scrollbar {
+    width: .3rem;
+}
+
+#content::-webkit-scrollbar-track {
+    background: transparent; 
+    border-radius: 1rem;
+}
+
+#content::-webkit-scrollbar-thumb {
+    background: rgba(50,48,59,255);
+    max-height: 2%; 
+}
+
+#content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); /* Thumb color on hover */
+}

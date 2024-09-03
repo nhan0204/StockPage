@@ -1,0 +1,7 @@
+.delete-button {
+    display: none;
+}
+
+h2:hover .delete-button {
+    display: inline;
+}

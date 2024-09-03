@@ -1,9 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Rubik&display=swap");
+@import url('https://fonts.cdnfonts.com/css/compagnon');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Rubik&display=swap");
-@import url('https://fonts.cdnfonts.com/css/compagnon');
 
 body {
     width: 100%;

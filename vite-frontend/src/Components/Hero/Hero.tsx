@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react' 
 import { Link } from 'react-router-dom';
-import hero from '../../Assets/hero.jpg';
+import hero from "../../Assets/hero.jpg";
 
 interface HeroProps {} 
 

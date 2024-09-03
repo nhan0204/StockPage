@@ -1,0 +1,15 @@
+@media only screen and (max-width: 850px) {
+    #company-page {
+        flex-direction: column-reverse;
+        max-height: 90vh;
+    }
+
+    #dashboard {
+        height: 80vh;
+        overflow-y: auto;
+    }
+
+    #peers {
+        max-width: fit-content;
+    }
+}

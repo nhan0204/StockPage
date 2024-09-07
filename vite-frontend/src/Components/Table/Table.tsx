@@ -34,7 +34,7 @@ const Table: React.FC<TableProps> = ({ configs, data, className }) => {
     return (
         <div id='table' className={`${className} bg-white shadow-xl rounded-xl overflow-x-auto `}>
             <table className='w-full'>
-                <thead className='bg-dark opacity-95'>
+                <thead className='bg-slate-800'>
                     <tr className='rounded-t-xl'>{renderHeaders}</tr>
                 </thead>
                 <tbody>{renderRows}</tbody>

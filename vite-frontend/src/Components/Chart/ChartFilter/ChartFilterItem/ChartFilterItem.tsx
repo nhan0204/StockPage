@@ -8,7 +8,7 @@ interface ChartFilterItemProps {
 
 const ChartFilterItem: React.FC<ChartFilterItemProps> = ({ text, active, onClick }) => {
     return (
-        <li className={`${active ? 'border-blue-500' : 'border-transparent'} w-12 h-auto border-2 rounded-md flex items-center justify-center cursor-pointer`} >
+        <li className={`${active ? 'border-blue-500' : 'border-transparent'} w-8 lg:w-12 h-auto border-2 rounded-md flex items-center justify-center cursor-pointer`} >
             <button
                 onClick={onClick}
                 className={active ? ' text-blue-500' : 'text-gray-500'}

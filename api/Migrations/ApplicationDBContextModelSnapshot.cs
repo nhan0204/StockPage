@@ -78,9 +78,12 @@ namespace api.Migrations
 
                     b.Property<string>("Symbol")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(25)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Symbol")
+                        .IsUnique();
 
                     b.ToTable("Stocks");
                 });

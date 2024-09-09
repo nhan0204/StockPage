@@ -12,7 +12,7 @@ using api.Database;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240906124045_init")]
+    [Migration("20240908045737_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -81,9 +81,12 @@ namespace api.Migrations
 
                     b.Property<string>("Symbol")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(25)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Symbol")
+                        .IsUnique();
 
                     b.ToTable("Stocks");
                 });

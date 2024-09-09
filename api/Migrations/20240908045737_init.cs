@@ -17,7 +17,7 @@ namespace api.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Symbol = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Symbol = table.Column<string>(type: "varchar(25)", nullable: false),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Industry = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MarketCap = table.Column<long>(type: "bigint", nullable: false),
@@ -54,6 +54,12 @@ namespace api.Migrations
                 name: "IX_Comments_StockId",
                 table: "Comments",
                 column: "StockId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Stocks_Symbol",
+                table: "Stocks",
+                column: "Symbol",
+                unique: true);
         }
 
         /// <inheritdoc />

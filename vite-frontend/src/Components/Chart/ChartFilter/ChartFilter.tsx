@@ -9,7 +9,7 @@ interface ChartFilterProps {
 
 const ChartFilter: React.FC<ChartFilterProps> = ({filter, setFilter}) => {
     return (
-        <ul className='flex absolute top-2 left-8 z-40 space-x-4'>
+        <ul className='flex absolute top-2 left-8 z-40 space-x-2 lg:space-x-4'>
             {Object.keys(chartConfigs).map(config =>
                 <ChartFilterItem
                     key={config}

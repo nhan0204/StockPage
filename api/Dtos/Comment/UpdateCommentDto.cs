@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace api.Dtos.Comment
 {
-    public class CreateCommentDto
-    {   
+    public class UpdateCommentDto
+    {
         [Required]
         [MinLength(5, ErrorMessage = "Title must have atleast 5 characters")]
         [MaxLength(280, ErrorMessage = "Title cannot be over 280 characters")]

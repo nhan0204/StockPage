@@ -27,7 +27,7 @@ namespace api.Mappers
         }
 
         // Converting StockDto from web api request to Stock Model
-        public static Stock ToStockFromCreateDto(this CreateStockRequestDto stockDto)
+        public static Stock ToStockFromCreate(this CreateStockRequestDto stockDto)
         {
             return new Stock
             {

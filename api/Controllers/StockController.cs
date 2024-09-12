@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Database;
 using api.Dtos;
 using api.DTOs;
+using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -25,12 +26,12 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var stocks = await _stockRepo.GetAllAsync();
+            var stocks = await _stockRepo.GetAllAsync(query);
             var stocksDto = stocks.Select(stock => stock!.ToStockDto());
             return Ok(stocksDto);
         }
@@ -71,7 +72,7 @@ namespace api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var stockModel = await _stockRepo.UpdateAsync(id, updateDto);
+            var stockModel = await _stockRepo.UpdateAsync(id, updateDto.ToStockFromUpdate());
 
             if (stockModel == null) 
                 return NotFound();

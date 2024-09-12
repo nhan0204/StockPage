@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Database;
 using api.Dtos;
 using api.DTOs;
+using api.Helpers;
 using api.Interfaces;
 using api.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +22,34 @@ namespace api.Repo
             _context = context;
         }
 
-        public async Task<List<Stock?>> GetAllAsync()
+        public async Task<List<Stock?>> GetAllAsync(QueryObject query)
         {
-            var stocks = await _context.Stocks.Include(stock => stock.Comments).ToListAsync();
-            return stocks!;
+            var stocks =  _context.Stocks.Include(stock => stock.Comments).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(query.Symbol))
+            {
+                stocks = stocks.Where(stock => stock.Symbol.Contains(query.Symbol));
+            }
+
+            if (!string.IsNullOrWhiteSpace(query.CompanyName))
+            {
+                stocks = stocks.Where(stock => stock.CompanyName.Contains(query.CompanyName));
+            }
+
+            if (!string.IsNullOrWhiteSpace(query.SortBy))
+            {
+                if (query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
+                {
+                    stocks = query.IsDescending ? 
+                        stocks.OrderByDescending(stock => stock.Symbol) :
+                        stocks.OrderBy(stock => stock.Symbol);
+                }
+            }
+
+            var skipNumber = (query.PageNumber - 1) * query.PageSize;
+            stocks = stocks.Skip(skipNumber).Take(query.PageSize);
+
+            return await stocks.ToListAsync() as List<Stock?>;
         }
 
 
@@ -41,19 +66,19 @@ namespace api.Repo
 
             return stockModel;
         }
-        public async Task<Stock?> UpdateAsync(int id, UpdateStockRequestDto updateDto)
+        public async Task<Stock?> UpdateAsync(int id, Stock stockModel)
         {
             var existingStock = await _context.Stocks.FirstOrDefaultAsync(stock => stock.Id == id);
 
             if (existingStock == null)
                 return null;
 
-            existingStock.Symbol = updateDto.Symbol;
-            existingStock.CompanyName = updateDto.CompanyName;
-            existingStock.Purchase = updateDto.Purchase;
-            existingStock.LastDividend = updateDto.LastDividend;
-            existingStock.Industry = updateDto.Industry;
-            existingStock.MarketCap = updateDto.MarketCap;
+            existingStock.Symbol = stockModel.Symbol;
+            existingStock.CompanyName = stockModel.CompanyName;
+            existingStock.Purchase = stockModel.Purchase;
+            existingStock.LastDividend = stockModel.LastDividend;
+            existingStock.Industry = stockModel.Industry;
+            existingStock.MarketCap = stockModel.MarketCap;
 
             await _context.SaveChangesAsync();
             return existingStock;

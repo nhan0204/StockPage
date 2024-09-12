@@ -69,6 +69,18 @@ namespace api.Controllers
             );
         }
 
+        [HttpPut]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCommentDto updateDto)
+        {
+            var commentModel = await _commentRepo.UpdateAsync(id, updateDto.ToCommentFromUpdate());
+
+            if (commentModel == null)
+                return NotFound();
+
+            return Ok(commentModel.ToCommentDto());
+        }
+
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)

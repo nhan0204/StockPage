@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Database;
 using api.Interfaces;
+using api.Migrations;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,6 +33,27 @@ namespace api.Repository
                 Industry = portfolio.Stock.Industry,
                 MarketCap = portfolio.Stock.MarketCap
             }).ToListAsync();
+        }
+
+        public async Task<Portfolio?> CreateAsync(Portfolio portfolioModel)
+        {
+            await _context.Portfolios.AddAsync(portfolioModel);
+            await _context.SaveChangesAsync();
+            return portfolioModel;
+        }
+
+        public async Task<Portfolio?> DeleteAsync(AppUser appUser, string symbol)
+        {
+            var portfolioModel = await _context.Portfolios
+                .FirstOrDefaultAsync(porfolio => porfolio.AppUserId == appUser.Id && porfolio.Stock!.Symbol.ToUpper() == symbol.ToUpper());
+
+            if (portfolioModel == null)
+                return null;
+
+            _context.Portfolios.Remove(portfolioModel);
+            await _context.SaveChangesAsync();
+
+            return portfolioModel;
         }
     }
 }

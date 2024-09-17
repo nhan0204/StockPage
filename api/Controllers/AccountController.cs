@@ -40,6 +40,15 @@ namespace api.Controllers
                     Email = regiterDto.Email,
                 };
 
+                var existingEmail = await _userManager.FindByEmailAsync(appUser.Email!);
+                var existingUserName = await _userManager.FindByNameAsync(appUser.UserName!);
+
+                if (existingEmail != null)
+                    return BadRequest("Email is already taken!");
+
+                if (existingUserName != null)
+                    return BadRequest("User name is already taken");
+    
                 var createdUser = await _userManager.CreateAsync(appUser, regiterDto.Password!);
 
                 if (createdUser.Succeeded)
@@ -75,7 +84,7 @@ namespace api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             
-            var user = await _userManager.Users.FirstOrDefaultAsync(user => user.UserName == loginDto.UserName!.ToLower());
+            var user = await _userManager.Users.FirstOrDefaultAsync(user => user.UserName!.ToUpper() == loginDto.UserName!.ToUpper());
 
             if (user == null)
                 return Unauthorized("Invalid username!");

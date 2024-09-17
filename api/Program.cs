@@ -1,3 +1,4 @@
+using System.Security.Cryptography.Xml;
 using api.Database;
 using api.Interfaces;
 using api.Models;
@@ -21,6 +22,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
 
+    // Token Authorize 
     options.AddSecurityDefinition("Bearer",
         new OpenApiSecurityScheme
         {
@@ -36,13 +38,13 @@ builder.Services.AddSwaggerGen(options =>
     options.AddSecurityRequirement(
         new OpenApiSecurityRequirement
         {
-            {    
+            {
                 new OpenApiSecurityScheme
                 {
                     Reference = new OpenApiReference
                     {
                         Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer",
+                        Id="Bearer"
                     }
                 },
                 new string[] {}
@@ -102,8 +104,8 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 

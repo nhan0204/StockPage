@@ -19,13 +19,13 @@ namespace api.Repository
         }
         public async Task<List<Comment?>> GetAllAsync()
         {
-            var comments = await _context.Comments.ToListAsync();
+            var comments = await _context.Comments.Include(comment => comment.AppUser).ToListAsync();
             return comments!;
         }
        
         public async Task<Comment?> GetByIdAsync(int id)
         {
-            var comment = await _context.Comments.FirstOrDefaultAsync(comment => comment.Id == id);
+            var comment = await _context.Comments.Include(comment => comment.AppUser).FirstOrDefaultAsync(comment => comment.Id == id);
             return comment!;
         }
         
@@ -37,12 +37,20 @@ namespace api.Repository
             return commentModel;
         }
 
-        public async Task<Comment?> UpdateAsync(int id, Comment commentModel)
+        public async Task<Comment?> UpdateAsync(int id, Comment commentModel, AppUser appUser)
         {
-            var existingComment = await _context.Comments.FirstOrDefaultAsync(comment => comment.Id == id);
+            var existingComment = await _context.Comments.Include(comment => comment.AppUser).FirstOrDefaultAsync(comment => comment.Id == id);
 
             if (existingComment == null)
                 return null;
+
+            if (existingComment.AppUser.Id != appUser.Id)   
+            {
+                return new Comment
+                {
+                    Title = "Unauthorized"
+                };
+            }
 
             existingComment.Title = commentModel.Title;
             existingComment.Content = commentModel.Content;
@@ -51,12 +59,20 @@ namespace api.Repository
             return existingComment;
         }
 
-        public async Task<Comment?> DelteAsync(int id)
+        public async Task<Comment?> DelteAsync(int id, AppUser appUser)
         {
-            var comment = await _context.Comments.FirstOrDefaultAsync(comment => comment.Id == id);
+            var comment = await _context.Comments.Include(comment => comment.AppUser).FirstOrDefaultAsync(comment => comment.Id == id);
 
             if (comment == null)
                 return null;
+
+            if (comment.AppUser.Id != appUser.Id)   
+            {
+                return new Comment
+                {
+                    Title = "Unauthorized"
+                };
+            }
 
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();

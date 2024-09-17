@@ -38,5 +38,52 @@ namespace api.Controllers
             var userPorfolioDto = userPorfolio.Select(portfolio => portfolio.ToStockDto());
             return Ok(userPorfolioDto);
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddPortfolio(string symbol)
+        {
+            var userName = User.GetUserName();
+            var appUser = await _userManager.FindByNameAsync(userName);
+            var stock = await _stockRepo.GetBySymbolAsync(symbol);
+
+            if (stock == null)
+                return BadRequest("Stock not found!");
+            
+            var userPorfolio = await _portfolioRepo.GetUserPortfolioAsync(appUser!);
+
+            if (userPorfolio.Any(stock => stock.Symbol.ToUpper() == symbol.ToUpper()))
+                return BadRequest("Stock already added!");
+
+            var portfolioModel = new Portfolio
+            {
+                StockId = stock.Id,
+                AppUserId = appUser!.Id
+            };
+
+            portfolioModel = await _portfolioRepo.CreateAsync(portfolioModel);
+
+            if (portfolioModel == null)
+                return StatusCode(500, "Porfolio could not created!");
+
+            return Ok(symbol.ToUpper() + " has been added to your portfolio");
+        }
+    
+        [HttpDelete]
+        [Authorize]
+        public async Task<IActionResult> DeletePorfolio(string symbol)
+        {
+            var userName = User.GetUserName();
+            var appUser = await _userManager.FindByNameAsync(userName);
+
+            var userPorfolio = await _portfolioRepo.GetUserPortfolioAsync(appUser!);
+
+            if (userPorfolio.Any(portfolio => portfolio.Symbol.ToUpper() == symbol.ToUpper()))
+                await _portfolioRepo.DeleteAsync(appUser!, symbol);
+            else 
+                return BadRequest("Stock not found in your portfolio!");
+
+            return Ok(symbol.ToUpper() + " has been deleted.");
+        }
     }
 }

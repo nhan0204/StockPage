@@ -4,8 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Dtos.Comment;
 using api.Dtos.CommentDtos;
+using api.Extensions;
 using api.Interfaces;
 using api.Mappers;
+using api.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -16,11 +20,13 @@ namespace api.Controllers
     {
         private readonly ICommentRepository _commentRepo;
         private readonly IStockRepository _stockRepo;
+        private readonly UserManager<AppUser> _userManager;
 
-        public CommentController(ICommentRepository commentRepo, IStockRepository stockRepo)
+        public CommentController(ICommentRepository commentRepo, IStockRepository stockRepo, UserManager<AppUser> userManager)
         {
             _commentRepo = commentRepo;
             _stockRepo = stockRepo;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -50,16 +56,26 @@ namespace api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("{stockId:int}")]
         public async Task<IActionResult> Create([FromRoute] int stockId, [FromBody] CreateCommentDto createDto)
         {
-            if (!await _stockRepo.StockExits(stockId))
-                return BadRequest("Stock does not exits");
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if (!await _stockRepo.StockExits(stockId))
+                return BadRequest("Stock does not exits");
+
+            var userName = User.GetUserName();
+            var appUser = await _userManager.FindByNameAsync(userName);
+
+            if (appUser == null)
+                return Unauthorized("User not found");
+
             var commentModel = createDto.ToCommentFromCreate(stockId);
+            commentModel.AppUser = appUser;
+            commentModel.AppUserId = appUser.Id;
+
             await _commentRepo.CreateAsync(commentModel);
 
             return CreatedAtAction(
@@ -70,28 +86,42 @@ namespace api.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCommentDto updateDto)
         {
-            var commentModel = await _commentRepo.UpdateAsync(id, updateDto.ToCommentFromUpdate());
+            var userName = User.GetUserName();
+            var appUser = await _userManager.FindByNameAsync(userName);
+
+            var commentModel = await _commentRepo.UpdateAsync(id, updateDto.ToCommentFromUpdate(), appUser!);
 
             if (commentModel == null)
                 return NotFound();
+
+            if (commentModel.Title == "Unauthorized")
+                return Unauthorized("You are not authorized to change this comment");
 
             return Ok(commentModel.ToCommentDto());
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-                
-            var comment = await _commentRepo.DelteAsync(id);
+
+            var userName = User.GetUserName();
+            var appUser = await _userManager.FindByNameAsync(userName);
+
+            var comment = await _commentRepo.DelteAsync(id, appUser!);
 
             if (comment == null)
                 return NotFound();
+
+            if (comment.Title == "Unauthorized")
+                return Unauthorized("You are not authorized to delete this comment");
 
             return NoContent();
         }

@@ -15,12 +15,15 @@ namespace api.Database
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Portfolio> Portfolios { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Stock>().HasIndex(stock => stock.Symbol).IsUnique();
+
+            modelBuilder.Entity<AppUser>().HasIndex(user => user.Email).IsUnique();
+
+            modelBuilder.Entity<AppUser>().HasIndex(user => user.UserName).IsUnique();
 
             modelBuilder.Entity<Portfolio>(porfolio => porfolio.HasKey(key => new { key.AppUserId, key.StockId}));
 

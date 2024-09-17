@@ -6,6 +6,7 @@ using api.Extensions;
 using api.Interfaces;
 using api.Mappers;
 using api.Models;
+using api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +20,14 @@ namespace api.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IStockRepository _stockRepo;
         private readonly IPortfolioRepository _portfolioRepo;
+        private readonly IFMPService _fmpService;
 
-        public PortfolioController(UserManager<AppUser> userManager, IStockRepository stockRepo, IPortfolioRepository portfolioRepo)
+        public PortfolioController(UserManager<AppUser> userManager, IStockRepository stockRepo, IPortfolioRepository portfolioRepo, IFMPService fmpService)
         {
             _userManager = userManager;
             _stockRepo = stockRepo;
             _portfolioRepo = portfolioRepo;
+            _fmpService = fmpService;
         }
 
         [HttpGet]
@@ -41,6 +44,7 @@ namespace api.Controllers
 
         [HttpPost]
         [Authorize]
+        [Route("{symbol:alpha}")]
         public async Task<IActionResult> AddPortfolio(string symbol)
         {
             var userName = User.GetUserName();
@@ -48,7 +52,14 @@ namespace api.Controllers
             var stock = await _stockRepo.GetBySymbolAsync(symbol);
 
             if (stock == null)
-                return BadRequest("Stock not found!");
+            {
+                stock = await _fmpService.FindStockBySymbolAsync(symbol);
+
+                if (stock == null)
+                    return BadRequest("This stock does not exists");
+                else 
+                    await _stockRepo.CreateAsync(stock);
+            }
             
             var userPorfolio = await _portfolioRepo.GetUserPortfolioAsync(appUser!);
 

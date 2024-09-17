@@ -1,4 +1,4 @@
-using System.Security.Cryptography.Xml;
+ using System.Security.Cryptography.Xml;
 using api.Database;
 using api.Interfaces;
 using api.Models;
@@ -6,6 +6,7 @@ using api.Repo;
 using api.Repository;
 using api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -107,18 +108,29 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
+// Serve as data seeding from FMP API
+builder.Services.AddScoped<IFMPService, FMPService>();
+builder.Services.AddHttpClient<IFMPService, FMPService>();
+
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors(options => options
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials()
+    // .WithOrigins("https://localhost:44351")
+    .SetIsOriginAllowed(origin => true)
+);
 
 app.MapControllers(); // Remmember to map controller
 app.Run();

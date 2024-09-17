@@ -27,7 +27,6 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if (!ModelState.IsValid)
@@ -52,6 +51,22 @@ namespace api.Controllers
 
             return Ok(stock.ToStockDto());
         }
+
+        [HttpGet]
+        [Route("{symbol:alpha}")]
+        public async Task<IActionResult> GetBySymbol(string symbol)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var stock = await _stockRepo.GetBySymbolAsync(symbol);
+
+            if (stock == null)
+                return NotFound();
+ 
+            return Ok(stock.ToStockDto());
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateStockRequestDto createDto)

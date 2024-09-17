@@ -24,23 +24,19 @@ namespace api.Repo
 
         public async Task<List<Stock?>> GetAllAsync(QueryObject query)
         {
-            var stocks =  _context.Stocks.Include(stock => stock.Comments).ThenInclude(comment => comment.AppUser).AsQueryable();
+            var stocks = _context.Stocks.Include(stock => stock.Comments).ThenInclude(comment => comment.AppUser).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(query.Symbol))
-            {
                 stocks = stocks.Where(stock => stock.Symbol.Contains(query.Symbol));
-            }
 
             if (!string.IsNullOrWhiteSpace(query.CompanyName))
-            {
                 stocks = stocks.Where(stock => stock.CompanyName.Contains(query.CompanyName));
-            }
 
             if (!string.IsNullOrWhiteSpace(query.SortBy))
             {
                 if (query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
                 {
-                    stocks = query.IsDescending ? 
+                    stocks = query.IsDescending ?
                         stocks.OrderByDescending(stock => stock.Symbol) :
                         stocks.OrderBy(stock => stock.Symbol);
                 }
@@ -57,6 +53,11 @@ namespace api.Repo
         {
             var stock = await _context.Stocks.Include(stock => stock.Comments).ThenInclude(comment => comment.AppUser).FirstOrDefaultAsync(stock => stock.Id == id);
             return stock!;
+        }
+
+        public async Task<Stock?> GetBySymbolAsync(string symbol)
+        {
+            return await _context.Stocks.FirstOrDefaultAsync(stock => stock.Symbol == symbol);
         }
 
         public async Task<Stock?> CreateAsync(Stock stockModel)
@@ -100,11 +101,6 @@ namespace api.Repo
         public async Task<bool> StockExits(int id)
         {
             return await _context.Stocks.AnyAsync(stock => stock.Id == id);
-        }
-
-        public async Task<Stock?> GetBySymbolAsync(string symbol)
-        {
-            return await _context.Stocks.FirstOrDefaultAsync(stock => stock.Symbol == symbol);
         }
     }
 }

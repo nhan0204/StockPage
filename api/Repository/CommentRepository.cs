@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Database;
 using api.Dtos.Comment;
+using api.Helpers;
 using api.Interfaces;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -17,10 +18,17 @@ namespace api.Repository
         {
             _context = context;
         }
-        public async Task<List<Comment?>> GetAllAsync()
+        public async Task<List<Comment?>> GetAllAsync(CommentQueryObject queryObject)
         {
-            var comments = await _context.Comments.Include(comment => comment.AppUser).ToListAsync();
-            return comments!;
+            var comments = _context.Comments.Include(comment => comment.AppUser).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryObject.Symbol))
+                comments = comments.Where(comment => comment.Stock!.Symbol == queryObject.Symbol);
+
+            if (queryObject.IsDescending)
+                comments = comments.OrderByDescending(comment => comment.CreatedOn);
+
+            return await comments.ToListAsync() as List<Comment?>;
         }
        
         public async Task<Comment?> GetByIdAsync(int id)

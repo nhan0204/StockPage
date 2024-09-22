@@ -22,8 +22,12 @@ const Navbar: React.FC<NavbarProps> = () => {
 
                 {/* Login Signup */}
                 <div className='flex flex-row items-center space-x-6 lg:space-x-8 text-black'>
-                    <div className='hover:cursor-pointer hover: hover:opacity-40'>Login</div>
-                    <a href='' className='bg-dark px-2 py-1.5 rounded-lg text-white hover:opacity-40'>Signup</a>
+                    <Link to="/login">
+                        <button className='hover:cursor-pointer hover: hover:opacity-40'>Login</button>
+                    </Link>
+                    <Link to="/register">
+                        <button className='bg-dark px-2 py-1.5 rounded-lg text-white hover:opacity-40'>Signup</button>
+                    </Link>
                 </div>
             </div>
         </nav>

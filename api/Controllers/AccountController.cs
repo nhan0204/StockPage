@@ -32,7 +32,10 @@ namespace api.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+                {
+                    var errors = ModelState.Values.SelectMany(value => value.Errors).Select(error => error.ErrorMessage);
+                    return BadRequest(new { Message = "Validation erros", Errors = errors });
+                }
 
                 var appUser = new AppUser
                 {

@@ -19,6 +19,7 @@ export default {
         darkTilt: "rgba(71, 69, 80, 1)",
         creame: "rgba(251,244,228,255)",
         darkCreame: "rgba(248, 233, 199, 1)",
+        lightGrey: "rgba(245,246,248,255)",
       },
       fontFamily: {
         sans: ["Poppins", "sans-serif"],

@@ -9,6 +9,8 @@ import CompanyPage from "../Pages/CompanyPage/CompanyPage";
 import DesignGuide from "../Pages/DesignGuide/DesignGuide";
 import HomePage from "../Pages/HomePage/HomePage";
 import SearchPage from "../Pages/SearchPage/SearchPage";
+import LoginPage from "../Pages/LoginPage/LoginPage";
+import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 
 export const router = createHashRouter([
     {
@@ -16,8 +18,10 @@ export const router = createHashRouter([
         element: <App />,
         children: [
             { path: "", element: <HomePage /> },
+            { path: "login", element: <LoginPage /> },
             { path: "search", element: <SearchPage /> },
             { path: "design-guide", element: <DesignGuide /> },
+            { path: "register", element: <RegisterPage/> },
             { 
                 path: "company/:ticker", 
                 element: <CompanyPage />,

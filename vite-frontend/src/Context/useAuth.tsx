@@ -26,32 +26,36 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const [user, setUser] = useState<UserProfile | null>(null);
     const [isReady, setIsReady] = useState<boolean>(false);
 
+    console.log(user, ' ', token)
+
     useEffect(() => {
-        const user = localStorage.getItem("user");
-        const token = localStorage.getItem("token");
+        const storedUser = localStorage.getItem("user");
+        const storedToken = localStorage.getItem("token");
 
-        console.log(user, ' ', token);
-
-        if (user && token) {
-            setUser(JSON.parse(user));
+        if (storedUser && storedToken) {
+            setUser(JSON.parse(storedUser));
             setToken(token);
-            axios.defaults.headers.common["Authorization"] = "Bearer" + token;
         }
 
         setIsReady(true);
     }, []);
 
+    useEffect(() => {
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        }
+    }, [token])
+
     const registerUser = async(email: string, username: string, password: string) => {
         await registerAPI(email, username, password)
         .then((response) => {
             if (response) {
-                localStorage.setItem("token", response.data.token);
-
                 const userObject = {
                     userName: response.data.userName,
                     email: response.data.email
                 }
-
+                
+                localStorage.setItem("token", response.data.token);
                 localStorage.setItem("user", JSON.stringify(userObject));
                 setToken(response.data.token);
                 setUser(userObject);
@@ -78,6 +82,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
                 setToken(response.data.token);
                 setUser(userObject);
 
+
                 toast.success("Login Success!");
                 navigate("/search");
             }
@@ -95,6 +100,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         setToken("");
         setUser(null);
         navigate("/");
+        delete axios.defaults.headers.common["Authorization"];
     }
 
     return (

@@ -121,16 +121,17 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.UseCors(options => options
+    .WithOrigins("https://localhost:8001")
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials()
-    // .WithOrigins("https://localhost:44351")
     .SetIsOriginAllowed(origin => true)
 );
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers(); // Remmember to map controller
 app.Run();

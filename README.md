@@ -6,3 +6,6 @@
 
 # CompanyPage
 ![CompanyPage](frontend/public/companypage.png)
+
+# LoginPage
+![LoginPage](frontend/public/loginpage.png)

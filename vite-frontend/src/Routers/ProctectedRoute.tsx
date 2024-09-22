@@ -10,8 +10,6 @@ const ProctectedRoute: React.FC<ProctectedRouteProps> = ({ children }) => {
     const location = useLocation();
     const { isLoggedIn } = useAuth();
 
-    console.log(isLoggedIn());
-
     return isLoggedIn() ? (
         <>{children}</>
     ) : (

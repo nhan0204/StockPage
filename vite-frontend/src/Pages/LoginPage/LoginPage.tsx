@@ -42,8 +42,8 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     }
 
     return (
-        <div className='bg-white flex flex-col-reverse lg:flex-row items-center lg:items-start  justify-center lg:gap-20 '>
-            <div className='container w-9/12 lg:w-4/12 mt-20'>
+        <div className='bg-white flex flex-col-reverse lg:flex-row items-center lg:items-start  justify-center lg:gap-20 pb-10'>
+            <div className='container w-8/12 lg:w-4/12 mt-8 lg:mt-20'>
                 <Tag className='w-xl mx-auto mb-12' head="Welcome back!" tail="Simply your work flow and productivity" flip={true}/>
                 <form  
                     onSubmit={handleSubmit(handleLogin)}

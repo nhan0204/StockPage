@@ -5,6 +5,7 @@ import { formatLargeNonMonetaryNumber, formatRatio } from '../../Helpers/NumberF
 import { getKeyMetrics } from '../../Services/api';
 import RatioList from '../RatioList/RatioList';
 import SectorFilings from '../SectorFilingsFinder/SectorFilingsFinder';
+import StockComment from '../StockComment/StockComment';
 
 interface CompanyProfileProps { }
 
@@ -91,6 +92,7 @@ const CompanyProfile: React.FC<CompanyProfileProps> = () => {
   return (
     <div className='mx-auto lg:mt-4 xl:ml-28 lg:max-w-5xl xl:max-w-full  h-full flex flex-col px-0 '>
       <SectorFilings ticker={ticker} className='ml-5  overflow-auto' />
+      <StockComment ticker={ticker} className='mt-8 lg:ml-5 lg:mb-8 ml-20 mx-auto max-w-48 lg:max-w-52'/>
       { companyData && <RatioList className='ml-5 my-12' configs={tableConfig} data={companyData!}/>}
     </div>
   );

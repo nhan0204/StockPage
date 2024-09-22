@@ -11,7 +11,7 @@ export type UserContextType = {
     registerUser: (email: string, username: string, password: string) => void;
     loginUser: (username: string, password: string) => void;
     logoutUser: () => void;
-    isLoggedIn: () => void;
+    isLoggedIn: () => boolean;
 }
 
 type UserProviderProps = {
@@ -29,6 +29,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     useEffect(() => {
         const user = localStorage.getItem("user");
         const token = localStorage.getItem("token");
+
+        console.log(user, ' ', token);
 
         if (user && token) {
             setUser(JSON.parse(user));
@@ -83,7 +85,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         .catch(e => toast.warning("Server error occured: ", e));
     }
 
-    const isLoggedIn = () => !!user;
+    const isLoggedIn = () => {
+        return !!user;
+    }
 
     const logoutUser = () => {
         localStorage.removeItem("token");
@@ -94,7 +98,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
 
     return (
-        <UserContext.Provider value={{ user, token, isLoggedIn, loginUser, registerUser, logoutUser }}>
+        <UserContext.Provider 
+            value={{ user, token, isLoggedIn, loginUser, registerUser, logoutUser }}
+        >
             {isReady ? children : null}
         </UserContext.Provider>
     )

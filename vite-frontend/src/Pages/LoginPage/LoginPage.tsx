@@ -7,6 +7,7 @@ import Spinner from '../../Components/Spinner/Spinner';
 import Tag from '../../Components/Tag/Tag';
 import { useAuth } from '../../Context/useAuth';
 import "./LoginPage.css";
+import { Link } from 'react-router-dom';
 
 interface LoginPageProps { }
 
@@ -68,12 +69,12 @@ const LoginPage: React.FC<LoginPageProps> = () => {
                         />
                     </div>
                     <div className='flex ml-auto my-4'>
-                        <a
-                            href='#'
+                        <Link
+                            to="/recovery"
                             className='text-sm font-medium hover:underline hover:opacity-50 black'
                         >
                             Forgot password?
-                        </a>
+                        </Link>
                     </div>
                     <button
                         type='submit'

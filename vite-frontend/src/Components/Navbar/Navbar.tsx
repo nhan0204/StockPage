@@ -28,10 +28,10 @@ const Navbar: React.FC<NavbarProps> = () => {
                     isLoggedIn() ? (
                         <>
                             {/* Welcome Logout */}
-                            <div className='flex flex-row items-center space-x-6 lg:space-x-8 text-black'>
-                                <div className='flex flex-row items-center gap-2  hover:cursor-pointer hover: hover:opacity-40 text-sm lg:text-lg text-right'>
-                                    <i className='bx bx-user text-xl lg:text-3xl'></i>
+                            <div className='flex flex-row items-center space-x-2 lg:space-x-8 text-black'>
+                                <div className='flex flex-row lg:flex-row-reverse items-center gap-1 lg:gap-2  hover:cursor-pointer hover: hover:opacity-40 text-sm lg:text-lg text-right'>
                                     <span>{user?.userName}</span>
+                                    <i className='bx bx-user text-xl lg:text-3xl'></i>
                                 </div>
                                 <Link to={"/login"} onClick={logoutUser} className='bg-dark px-2 py-1.5 rounded-lg text-white hover:opacity-40'>Logout</Link>
                             </div>

@@ -12,6 +12,7 @@ import SearchPage from "../Pages/SearchPage/SearchPage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 import ProctectedRoute from "./ProctectedRoute";
+import RecoveryPage from "../Pages/RecoveryPage/RecoveryPage";
 
 export const router = createHashRouter([
     {
@@ -21,6 +22,7 @@ export const router = createHashRouter([
             { path: "", element: <HomePage /> },
             { path: "login", element: <LoginPage /> },
             { path: "register", element: <RegisterPage /> },
+            { path: "recovery", element: <RecoveryPage /> },
             { path: "design-guide", element: <DesignGuide /> },
             {
                 path: "search",

@@ -37,7 +37,7 @@ namespace api.Repo
                 if (query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
                 {
                     stocks = query.IsDescending ?
-                        stocks.OrderByDescending(stock => stock.Symbol) :
+                        stocks.OrderByDescending(stock => stock.Symbol) : 
                         stocks.OrderBy(stock => stock.Symbol);
                 }
             }

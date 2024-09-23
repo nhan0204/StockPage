@@ -4,7 +4,7 @@ import { RouterProvider } from 'react-router-dom'
 import './index.css'
 import { router } from './Routers/Routers.tsx'
 
-localStorage.clear();
+localStorage.removeItem("token");
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

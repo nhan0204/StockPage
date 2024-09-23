@@ -26,8 +26,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const [user, setUser] = useState<UserProfile | null>(null);
     const [isReady, setIsReady] = useState<boolean>(false);
 
-    console.log(user, ' ', token)
-
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
         const storedToken = localStorage.getItem("token");

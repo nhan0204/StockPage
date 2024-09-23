@@ -1,6 +1,0 @@
-.image-enhanced {
-    filter: contrast(1.1) brightness(1.05);
-    image-rendering:  -webkit-optimize-contrast;
-    width: 100%;
-    height: auto;
-}

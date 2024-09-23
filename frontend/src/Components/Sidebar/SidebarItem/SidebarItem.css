@@ -1,4 +1,0 @@
-#select:checked + #label {
-    border-color: rgba(50,48,59,255);
-    transition: border-color 0.3s ease-in-out;
-}

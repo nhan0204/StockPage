@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCompanyLogo } from '../../Services/api';
+import { getCompanyLogoAPI } from '../../Services/CompanyService';
 import './CompanyLogo.css';
 
 interface CompanyLogoProps {
@@ -16,7 +16,7 @@ const CompanyLogo: React.FC<CompanyLogoProps> = ({ ticker, className }) => {
         if (logo) {
             setCompanyLogo(logo!);
         } else {
-            logo = await getCompanyLogo(ticker);
+            logo = await getCompanyLogoAPI(ticker);
             
             if (logo) {
                 setCompanyLogo(logo);
@@ -27,7 +27,7 @@ const CompanyLogo: React.FC<CompanyLogoProps> = ({ ticker, className }) => {
 
     useEffect(() => {
         getCompanyLogoInit();
-    }, [ticker])
+    }, [ticker]);
 
     return (
         <div className={className}>

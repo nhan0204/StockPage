@@ -1,5 +1,5 @@
 #loading-spinner {
     position: relative;
-    transform: translateX(-50%);
+    transform: translateX(-50%, -50%);
     margin-top: 10rem;
 }

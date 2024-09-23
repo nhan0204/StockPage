@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using api.Dtos.Stock;
 using api.Mappers;
@@ -44,6 +45,50 @@ namespace api.Services
             }
 
             return null;
+        }
+
+        public async Task<string?> GetCompanyLogoAsync(string symbol)
+        {
+            try 
+            {
+                var apiKey = _config["FMPKey"];
+                var logoUrl = $"https://financialmodelingprep.com/image-stock/{symbol.ToUpper()}.png?apikey={apiKey}";
+                var result = await _httpClient.GetAsync(logoUrl);
+
+                if (result.IsSuccessStatusCode)
+                    return logoUrl;
+                
+            } 
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+
+            }
+
+            return null;
+        }
+
+        public async Task<string[]> GetCompanyPeersGroupAsync(string symbol)
+        {
+            try 
+            {
+                var apiKey = _config["FHIKey"];
+                var result = await _httpClient.GetAsync($"https://finnhub.io/api/v1/stock/peers?symbol={symbol.ToUpper()}&token={apiKey}");
+
+                if (result.IsSuccessStatusCode)
+                {
+                    var content = await result.Content.ReadAsStringAsync();
+                    var peersGroup = JsonConvert.DeserializeObject<string[]>(content);
+
+                    return peersGroup!;
+                }
+            } 
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return Array.Empty<string>();
         }
     }
 }

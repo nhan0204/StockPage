@@ -1,11 +1,11 @@
 # HomePage
-![Homepage](frontend/public/homepage.png)
+![Homepage](vite-frontend/src/Assets/homepage.png)
 
 # SearchPage
-![Navbar and Search](frontend/public/stockpage.png)
+![Navbar and Search](vite-frontend/src/Assets/searchpage.png)
 
 # CompanyPage
-![CompanyPage](frontend/public/companypage.png)
+![CompanyPage](vite-frontend/src/Assets/companypage.png)
 
 # LoginPage
-![LoginPage](frontend/public/loginpage.png)
+![LoginPage](vite-frontend/src/Assets/loginpage.png)

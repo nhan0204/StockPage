@@ -11,7 +11,6 @@ import HomePage from "../Pages/HomePage/HomePage";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegisterPage from "../Pages/RegisterPage/RegisterPage";
-import ProctectedRoute from "./ProctectedRoute";
 import RecoveryPage from "../Pages/RecoveryPage/RecoveryPage";
 
 export const router = createHashRouter([
@@ -27,18 +26,14 @@ export const router = createHashRouter([
             {
                 path: "search",
                 element: (
-                    <ProctectedRoute>
-                        <SearchPage />
-                    </ProctectedRoute>
+                    <SearchPage />
                 ),
             },
             {
                 path: "company/:ticker",
                 element: (
-                    <ProctectedRoute>
-                        <CompanyPage />,
-                    </ProctectedRoute>
-                ), 
+                    <CompanyPage/>
+                ),
                 children: [
                     { path: "company-profile", element: <CompanyProfile /> },
                     { path: "income-statement", element: <IncomeStatement /> },
